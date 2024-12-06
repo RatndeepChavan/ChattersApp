@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+
+// Regex string to verify conventional commit message
+const conventionalCommitMessageRegExp =
+	/^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\-\.]+\))?(!)?: ([\w ])+([\s\S]*)/g;
+
+// Default exit codes
+const ERROR_EXIT_CODE = 1;
+const SUCCESS_EXIT_CODE = 0;
+
+// Extract commit message
+const commitMsgFile = process.argv[2];
+const message = fs.readFileSync(commitMsgFile, "utf8");
+
+// Validate conventional commit
+const isValid = conventionalCommitMessageRegExp.test(message);
+
+// Exit with error code for invalid commit message
+if (!isValid) {
+	console.log(
+		"Cannot commit: the commit message does not comply with conventional commits standards.",
+	);
+	process.exit(ERROR_EXIT_CODE);
+}
+
+// Date object
+const today = new Date(Date.now());
+
+// Update commit message
+fs.writeFileSync(process.argv[2], `[${today.toDateString()}]: ` + message);
+
+// Exit with success code
+process.exit(SUCCESS_EXIT_CODE);
