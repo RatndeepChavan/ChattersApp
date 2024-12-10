@@ -19,9 +19,10 @@ const isValid = conventionalCommitMessageRegExp.test(message);
 
 // Exit with error code for invalid commit message
 if (!isValid) {
-	console.log(
-		"Cannot commit: the commit message does not comply with conventional commits standards.",
-	);
+	console.log(`Error ABORT_COMMIT:
+	Commit message does not comply with conventional commits standards.
+	Please use "npx cz" to get conventional commit options.
+	`);
 	process.exit(ERROR_EXIT_CODE);
 }
 

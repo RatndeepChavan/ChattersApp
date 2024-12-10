@@ -6,10 +6,10 @@ branch=$(git branch --show-current)
 
 # Protect master and production branch from direct comit
 if [[ $branch == "master" ]]; then
-    echo "Direct commits to master is not allowed. Please update and merge from production."
+    echo "Direct code push to master is not allowed. Please update and merge from production."
     exit 1
 elif [[ $branch == "production" ]]; then
-    echo "Direct commits to production is not allowed. Please updated and merge from development."
+    echo "Direct code push to production is not allowed. Please updated and merge from development."
     exit 1
 elif [[ $branch == "development" ]]; then
     # Run linting and testing

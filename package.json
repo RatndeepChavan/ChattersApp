@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "echo \"Error: not lining tool\" && exit 1"
   },
   "keywords": [],
   "author": "",
