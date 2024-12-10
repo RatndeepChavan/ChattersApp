@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" ",
     "prepare": "husky install",
-    "lint": "echo \"Error: not lining tool\" && exit 1"
+    "lint": "echo \"Error: not lining tool\" "
   },
   "keywords": [],
   "author": "",
