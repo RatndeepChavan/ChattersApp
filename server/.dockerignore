@@ -1,0 +1,28 @@
+# Environmental variables
+.env
+
+# Docker files
+.dockerignore
+Dockerfile
+
+# Installed packages
+node_modules
+
+# Logs
+logs
+*.log
+
+# Git files
+.git
+.gitignore
+
+# Readme files and documentation
+docs
+jsdoc*
+README*
+*.md
+
+# IDE directories and files
+.vscode
+.cspell*
+

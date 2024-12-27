@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/DetailsForm.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#Chat">Chat</a></li><li><a href="global.html#DetailsForm">DetailsForm</a></li><li><a href="global.html#LogInForm">LogInForm</a></li><li><a href="global.html#LogOutButton">LogOutButton</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#ProfileImage">ProfileImage</a></li><li><a href="global.html#getErrorMessage">getErrorMessage</a></li><li><a href="global.html#getSuccessMessage">getSuccessMessage</a></li><li><a href="global.html#toastNotification">toastNotification</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/DetailsForm.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import detailsValidationSchema from "@/validations/UserDetails";
+import { useUserStore } from "@/store";
+import { apiClient } from "@/lib/api-client";
+import { UPDATE_USER_ROUTE } from "@/utils/constants";
+import { getErrorMessage, getSuccessMessage, toastNotification } from "@/utils/helpers.js";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+/**
+ * &lt;h3>Details Form component&lt;/h3>
+ * &lt;b>This component renders the details form. Here user can update their details&lt;/b>&lt;br/>
+ * &lt;p>This component uses shadcn Form and useForm from react-form-hook&lt;/p>
+ * &lt;p>This component uses Yup for input validations&lt;/p>
+ *
+ * @param {*} props
+ * @returns Form element
+ */
+const DetailsForm = (props) => {
+	const navigate = useNavigate();
+	const { image } = { ...props };
+	const { userInfo, setUserInfo } = useUserStore();
+
+	const detailsForm = useForm({
+		defaultValues: {
+			username: "",
+			status: "",
+		},
+
+		resolver: yupResolver(detailsValidationSchema),
+	});
+
+	useEffect(() => {
+		if (userInfo) {
+			detailsForm.reset({
+				username: userInfo.username,
+				status: userInfo.status,
+			});
+		}
+	}, [userInfo, detailsForm]);
+
+	const submitDetails = async (data) => {
+		data.image = image;
+		await apiClient
+			.post(UPDATE_USER_ROUTE, { ...data })
+			.then((res) => {
+				// Success notification
+				const message = getSuccessMessage(res);
+				setUserInfo(res.data.data);
+				toastNotification("success", message);
+				navigate("/chat");
+			})
+			.catch((error) => {
+				// Error notification
+				const errorMessage = getErrorMessage(error);
+				toastNotification("error", errorMessage);
+			});
+	};
+
+	return (
+		&lt;Form {...detailsForm}>
+			&lt;form
+				onSubmit={detailsForm.handleSubmit(submitDetails)}
+				className="space-y-8 w-[90%]"
+				id="user-details-form"
+			>
+				{/* ----------------------------------------------------------
+                    *Username Field
+                    ---------------------------------------------------------- */}
+
+				&lt;FormField
+					control={detailsForm.control}
+					name="username"
+					render={({ field }) => (
+						&lt;FormItem>
+							&lt;FormControl>
+								&lt;Input
+									className="rounded-full"
+									placeholder="Enter your username"
+									{...field}
+								/>
+							&lt;/FormControl>
+							&lt;FormMessage />
+						&lt;/FormItem>
+					)}
+				/>
+				{/* ----------------------------------------------------------
+                    *Status Field
+                    ---------------------------------------------------------- */}
+
+				&lt;FormField
+					control={detailsForm.control}
+					name="status"
+					render={({ field }) => (
+						&lt;FormItem>
+							&lt;FormControl>
+								&lt;Input
+									className="rounded-full"
+									placeholder="Enter your status"
+									{...field}
+								/>
+							&lt;/FormControl>
+							&lt;FormMessage />
+						&lt;/FormItem>
+					)}
+				/>
+			&lt;/form>
+		&lt;/Form>
+	);
+};
+
+export default DetailsForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Wed Nov 06 2024 15:02:58 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

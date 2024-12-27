@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/LogOutButton.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.ArrowBackLeft">ArrowBackLeft</a></li><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.LogInForm">LogInForm</a></li><li data-type='method'><a href="Pages.auth.components.html#.OTPHandler">OTPHandler</a></li><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Pages.profile.html">profile</a><ul class='methods'><li data-type='method'><a href="Pages.profile.html#.Profile">Profile</a></li></ul></li><li><a href="Pages.profile.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.profile.components.html#.DetailsForm">DetailsForm</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfileImage">ProfileImage</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfilePageSkeleton">ProfilePageSkeleton</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li><li><a href="libs.html">libs</a><ul class='methods'><li data-type='method'><a href="libs.html#.refreshToken">refreshToken</a></li><li data-type='method'><a href="libs.html#.runQueuedRequests">runQueuedRequests</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#Chat">Chat</a></li><li><a href="global.html#LogOutButton">LogOutButton</a></li><li><a href="global.html#getErrorMessage">getErrorMessage</a></li><li><a href="global.html#getSuccessMessage">getSuccessMessage</a></li><li><a href="global.html#handleKeyDown">handleKeyDown</a></li><li><a href="global.html#toastNotification">toastNotification</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/LogOutButton.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { apiClient } from "@/lib/api-client";
+import { LOGOUT_ROUTE } from "@/utils/constants";
+import { toastNotification, getSuccessMessage, getErrorMessage } from "@/utils/helpers";
+import { useCurrentChatStore, useProfileStore, useUserStore } from "@/store";
+import { LucidePowerOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+/**
+ * &lt;h3>Log Out Button Component&lt;/h3>
+ * &lt;b>Component that renders logout button and handles the user log out functionality&lt;/b>&lt;br/>
+ *
+ * @returns Button with log out functionality
+ */
+const LogOutButton = () => {
+	const { setUserInfo } = useUserStore();
+	const { setProfileId } = useProfileStore();
+	const { setCurrentChat } = useCurrentChatStore();
+	const navigate = useNavigate();
+
+	const logOut = async () => {
+		await apiClient
+			.get(LOGOUT_ROUTE)
+			.then((res) => {
+				// Success notification
+				const message = getSuccessMessage(res);
+				toastNotification("success", message);
+				setUserInfo(undefined);
+				setProfileId(undefined);
+				setCurrentChat(undefined);
+				navigate("/auth");
+			})
+			.catch((error) => {
+				// Error notification
+				const errorMessage = getErrorMessage(error);
+				toastNotification("error", errorMessage);
+			});
+	};
+
+	return (
+		&lt;Avatar title="Log Out" className="w-full h-full cursor-pointer border-2 border-black">
+			&lt;AvatarFallback className="bg-white hover:bg-black hover:text-white" onClick={logOut}>
+				&lt;LucidePowerOff />
+			&lt;/AvatarFallback>
+		&lt;/Avatar>
+	);
+};
+
+export default LogOutButton;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Thu Nov 14 2024 13:05:58 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

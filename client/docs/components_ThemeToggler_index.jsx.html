@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/ThemeToggler/index.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.ArrowBackLeft">ArrowBackLeft</a></li><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.FriendRequestButton">FriendRequestButton</a></li><li data-type='method'><a href="Components.html#.LogOutButton">LogOutButton</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.ProfileCard">ProfileCard</a></li><li data-type='method'><a href="Components.html#.ProgressBar">ProgressBar</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.ThemeToggler">ThemeToggler</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Components.Skeletons.html">Skeletons</a><ul class='methods'><li data-type='method'><a href="Components.Skeletons.html#.ProfileCardSkeleton">ProfileCardSkeleton</a></li></ul></li><li><a href="Context.html">Context</a><ul class='methods'><li data-type='method'><a href="Context.html#.SocketProvider">SocketProvider</a></li><li data-type='method'><a href="Context.html#.ThemeProvider">ThemeProvider</a></li></ul></li><li><a href="Hooks.html">Hooks</a><ul class='methods'><li data-type='method'><a href="Hooks.html#.useDebouncedQuery">useDebouncedQuery</a></li><li data-type='method'><a href="Hooks.html#.useSocketEventListener">useSocketEventListener</a></li><li data-type='method'><a href="Hooks.html#.useTheme">useTheme</a></li></ul></li><li><a href="Libs.html">Libs</a><ul class='methods'><li data-type='method'><a href="Libs.html#.refreshToken">refreshToken</a></li><li data-type='method'><a href="Libs.html#.runQueuedRequests">runQueuedRequests</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.LogInForm">LogInForm</a></li><li data-type='method'><a href="Pages.auth.components.html#.OTPHandler">OTPHandler</a></li><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Pages.chat.html">chat</a><ul class='methods'><li data-type='method'><a href="Pages.chat.html#.Chat">Chat</a></li></ul></li><li><a href="Pages.chat.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.html#.AddChatButton">AddChatButton</a></li><li data-type='method'><a href="Pages.chat.components.html#.ChatList">ChatList</a></li></ul></li><li><a href="Pages.chat.components.ChatContainer.html">ChatContainer</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.ChatContainer">ChatContainer</a></li><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.MessageForm">MessageForm</a></li></ul></li><li><a href="Pages.chat.components.NotificationDialog.html">NotificationDialog</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationActions">NotificationActions</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationButtons">NotificationButtons</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.Notifications">Notifications</a></li></ul></li><li><a href="Pages.profile.html">profile</a><ul class='methods'><li data-type='method'><a href="Pages.profile.html#.Profile">Profile</a></li></ul></li><li><a href="Pages.profile.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.profile.components.html#.DetailsForm">DetailsForm</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfileImage">ProfileImage</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfilePageSkeleton">ProfilePageSkeleton</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li><li><a href="Utils.html">Utils</a><ul class='methods'><li data-type='method'><a href="Utils.html#.handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="Utils.html#.toastNotification">toastNotification</a></li></ul></li></ul><h3><a href="global.html">Global</a></h3>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/ThemeToggler/index.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useTheme } from "@/hooks/useTheme";
+
+/**
+ * @memberof Components
+ *
+ * @description
+ * - ThemeToggler component provides a button that toggles the theme between "light" and "dark".
+ * - The button displays different icons depending on the current theme.
+ *
+ * @returns {JSX.Element} The ThemeToggler component.
+ */
+const ThemeToggler = () => {
+	// Access the theme and setTheme function
+	const { theme, setTheme } = useTheme();
+
+	// Function to toggle the theme between "light" and "dark".
+	const handleClick = () => {
+		theme === "light" ? setTheme("dark") : setTheme("light");
+	};
+
+	return (
+		&lt;div className="h-full w-full flex justify-center items-center bg-transparent">
+			&lt;button
+				className="h-12 w-12 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+				title="Change theme"
+				onClick={handleClick}
+			>
+				{/* ----------------------------------------------------------
+					* Sun icon (for light mode)
+					---------------------------------------------------------- */}
+
+				&lt;svg
+					className="fill-violet-700 block dark:hidden"
+					fill="currentColor"
+					viewBox="0 0 20 20"
+				>
+					&lt;path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z">&lt;/path>
+				&lt;/svg>
+
+				{/* ----------------------------------------------------------
+					* Moon icon (for dark mode) 
+					---------------------------------------------------------- */}
+
+				&lt;svg
+					className="fill-yellow-500 hidden dark:block"
+					fill="currentColor"
+					viewBox="0 0 20 20"
+				>
+					&lt;path
+						d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+						fillRule="evenodd"
+						clipRule="evenodd"
+					>&lt;/path>
+				&lt;/svg>
+			&lt;/button>
+		&lt;/div>
+	);
+};
+
+export default ThemeToggler;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri Dec 27 2024 13:42:28 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
