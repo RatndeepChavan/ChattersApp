@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>pages/chat/components/ChatContainer/MessageForm.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.ArrowBackLeft">ArrowBackLeft</a></li><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.FriendRequestButton">FriendRequestButton</a></li><li data-type='method'><a href="Components.html#.LogOutButton">LogOutButton</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.ProfileCard">ProfileCard</a></li><li data-type='method'><a href="Components.html#.ProgressBar">ProgressBar</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.ThemeToggler">ThemeToggler</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Components.Skeletons.html">Skeletons</a><ul class='methods'><li data-type='method'><a href="Components.Skeletons.html#.ProfileCardSkeleton">ProfileCardSkeleton</a></li></ul></li><li><a href="Context.html">Context</a><ul class='methods'><li data-type='method'><a href="Context.html#.SocketProvider">SocketProvider</a></li><li data-type='method'><a href="Context.html#.ThemeProvider">ThemeProvider</a></li></ul></li><li><a href="Hooks.html">Hooks</a><ul class='methods'><li data-type='method'><a href="Hooks.html#.useDebouncedQuery">useDebouncedQuery</a></li><li data-type='method'><a href="Hooks.html#.useSocketEventListener">useSocketEventListener</a></li><li data-type='method'><a href="Hooks.html#.useTheme">useTheme</a></li></ul></li><li><a href="Libs.html">Libs</a><ul class='methods'><li data-type='method'><a href="Libs.html#.refreshToken">refreshToken</a></li><li data-type='method'><a href="Libs.html#.runQueuedRequests">runQueuedRequests</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.LogInForm">LogInForm</a></li><li data-type='method'><a href="Pages.auth.components.html#.OTPHandler">OTPHandler</a></li><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Pages.chat.html">chat</a><ul class='methods'><li data-type='method'><a href="Pages.chat.html#.Chat">Chat</a></li></ul></li><li><a href="Pages.chat.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.html#.AddChatButton">AddChatButton</a></li><li data-type='method'><a href="Pages.chat.components.html#.ChatList">ChatList</a></li></ul></li><li><a href="Pages.chat.components.ChatContainer.html">ChatContainer</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.ChatContainer">ChatContainer</a></li><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.MessageForm">MessageForm</a></li></ul></li><li><a href="Pages.chat.components.NotificationDialog.html">NotificationDialog</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationActions">NotificationActions</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationButtons">NotificationButtons</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.Notifications">Notifications</a></li></ul></li><li><a href="Pages.profile.html">profile</a><ul class='methods'><li data-type='method'><a href="Pages.profile.html#.Profile">Profile</a></li></ul></li><li><a href="Pages.profile.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.profile.components.html#.DetailsForm">DetailsForm</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfileImage">ProfileImage</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfilePageSkeleton">ProfilePageSkeleton</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li><li><a href="Utils.html">Utils</a><ul class='methods'><li data-type='method'><a href="Utils.html#.handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="Utils.html#.toastNotification">toastNotification</a></li></ul></li></ul><h3><a href="global.html">Global</a></h3>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">pages/chat/components/ChatContainer/MessageForm.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { SendHorizontalIcon, SmileIcon, XIcon } from "lucide-react";
+import TextareaAutosize from "react-textarea-autosize";
+import EmojiPicker from "emoji-picker-react";
+import { useRef, useState } from "react";
+import { useCurrentChatStore } from "@/store";
+import { UPDATE_MESSAGES } from "@/utils/constants";
+import { apiClient } from "@/lib/api-client";
+import { useMutation } from "@tanstack/react-query";
+import Spinner from "@/components/Spinner";
+import { forwardRef } from "react";
+
+/**
+ * @memberof Pages.chat.components.ChatContainer
+ *
+ * @function MessageForm
+ *
+ * @description
+ * - This component renders form with input, emoji and send button which allow user to chat and send messages.
+ * - Emoji input is handle by third party library `emoji-picker-react`.
+ * - Input is looks single line but it is textarea field handle by `react-textarea-autosize`.
+ * - Textarea input allow user to add three vertical sentences without scroll and adds scrollbar afterwards.
+ * - Whenever user sends message it make POST API call to save data then server broadcast it via socket for real time communication.
+ * - To indicate loading state spinner is displayed in ui.
+ *
+ * @param {Object} props - Props for the component.
+ * @param {string} props.setConversations - Function to update conversation state variable.
+ *
+ * @returns {JSX.Element} JSX element that renders message form footer of chatting screen.
+ */
+const MessageForm = forwardRef(function MessageForm(props, ref) {
+	// Destruct the component props
+	const { setConversations } = { ...props };
+	const { currentChat } = useCurrentChatStore();
+	const messageRef = useRef();
+	const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+
+	// Define form with initial values
+	const messageForm = useForm({
+		defaultValues: { message: "" },
+	});
+
+	// Function to handle emoji input and update the message.
+	const handleEmoji = (emoji) => {
+		// ? avoiding use of sate variable to reduce re-rendering
+		const message = messageRef.current.firstElementChild.value;
+		messageForm.setValue("message", message + emoji.emoji);
+	};
+
+	// Function to make POST API call to update message db with user message
+	// ? Database is center of truth and will avoid any communication gap so it is must to update it with each message.
+	const sendMessage = async () => {
+		const message = messageRef.current.firstElementChild.value;
+		const { data } = await apiClient.post(UPDATE_MESSAGES, {
+			receiverId: currentChat["_id"],
+			conversationId: currentChat.conversationId,
+			message,
+		});
+		return data.data;
+	};
+
+	// Mutation hook to manage api call states and process side effect of successful response.
+	const { mutate, isPending } = useMutation({
+		mutationFn: sendMessage,
+		onSuccess: (data) => {
+			const { _id, senderId, message } = data;
+			ref.current = _id;
+			messageForm.reset();
+			setOpenEmojiPicker(false);
+			setConversations((prev) => [...prev, { _id, senderId, message }]);
+		},
+	});
+
+	// Wrapper function to handle submit and trigger mutation function.
+	const handleSubmit = (data) => {
+		mutate(data);
+	};
+
+	return (
+		&lt;Form {...messageForm}>
+			&lt;form
+				onSubmit={messageForm.handleSubmit(handleSubmit)}
+				className="flex w-full h-full justify-center items-center"
+			>
+				{/* ----------------------------------------------------------
+					* EmojiPicker
+					---------------------------------------------------------- */}
+				&lt;div className="relative h-10 w-10 p-2">
+					&lt;div className="absolute -translate-y-[103%]">
+						&lt;EmojiPicker open={openEmojiPicker} onEmojiClick={handleEmoji} />
+					&lt;/div>
+					&lt;div onClick={() => setOpenEmojiPicker((prev) => !prev)}>
+						{openEmojiPicker ? &lt;XIcon /> : &lt;SmileIcon />}
+					&lt;/div>
+				&lt;/div>
+
+				{/* ----------------------------------------------------------
+					* Autosize textarea input field 
+					---------------------------------------------------------- */}
+				&lt;FormField
+					control={messageForm.control}
+					name="message"
+					render={({ field }) => (
+						&lt;FormItem className="w-[80%] flex h-full justify-center items-center">
+							&lt;FormControl>
+								&lt;div className="flex h-full w-full items-center" ref={messageRef}>
+									&lt;TextareaAutosize
+										minRows={1}
+										maxRows={3}
+										placeholder="Type message"
+										className="resize-none flex h-full w-full rounded-md border border-input px-3 py-2 text-sm placeholder:text-muted-foreground bg-secondary dark:bg-muted"
+										{...field}
+									/>
+								&lt;/div>
+							&lt;/FormControl>
+						&lt;/FormItem>
+					)}
+				/>
+
+				{/* ----------------------------------------------------------
+					* Submit button
+					---------------------------------------------------------- */}
+				&lt;Button className="ms-2 h-9 w-9" type="submit" size="icon">
+					{isPending ? &lt;Spinner /> : &lt;SendHorizontalIcon />}
+				&lt;/Button>
+			&lt;/form>
+		&lt;/Form>
+	);
+});
+
+export default MessageForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri Dec 27 2024 13:42:28 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

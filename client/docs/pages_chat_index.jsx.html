@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>pages/chat/index.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.ArrowBackLeft">ArrowBackLeft</a></li><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.FriendRequestButton">FriendRequestButton</a></li><li data-type='method'><a href="Components.html#.LogOutButton">LogOutButton</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.ProfileCard">ProfileCard</a></li><li data-type='method'><a href="Components.html#.ProgressBar">ProgressBar</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.ThemeToggler">ThemeToggler</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Components.Skeletons.html">Skeletons</a><ul class='methods'><li data-type='method'><a href="Components.Skeletons.html#.ProfileCardSkeleton">ProfileCardSkeleton</a></li></ul></li><li><a href="Context.html">Context</a><ul class='methods'><li data-type='method'><a href="Context.html#.SocketProvider">SocketProvider</a></li><li data-type='method'><a href="Context.html#.ThemeProvider">ThemeProvider</a></li></ul></li><li><a href="Hooks.html">Hooks</a><ul class='methods'><li data-type='method'><a href="Hooks.html#.useDebouncedQuery">useDebouncedQuery</a></li><li data-type='method'><a href="Hooks.html#.useSocketEventListener">useSocketEventListener</a></li><li data-type='method'><a href="Hooks.html#.useTheme">useTheme</a></li></ul></li><li><a href="Libs.html">Libs</a><ul class='methods'><li data-type='method'><a href="Libs.html#.refreshToken">refreshToken</a></li><li data-type='method'><a href="Libs.html#.runQueuedRequests">runQueuedRequests</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.LogInForm">LogInForm</a></li><li data-type='method'><a href="Pages.auth.components.html#.OTPHandler">OTPHandler</a></li><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Pages.chat.html">chat</a><ul class='methods'><li data-type='method'><a href="Pages.chat.html#.Chat">Chat</a></li></ul></li><li><a href="Pages.chat.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.html#.AddChatButton">AddChatButton</a></li><li data-type='method'><a href="Pages.chat.components.html#.ChatList">ChatList</a></li></ul></li><li><a href="Pages.chat.components.ChatContainer.html">ChatContainer</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.ChatContainer">ChatContainer</a></li><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.MessageForm">MessageForm</a></li></ul></li><li><a href="Pages.chat.components.NotificationDialog.html">NotificationDialog</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationActions">NotificationActions</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationButtons">NotificationButtons</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.Notifications">Notifications</a></li></ul></li><li><a href="Pages.profile.html">profile</a><ul class='methods'><li data-type='method'><a href="Pages.profile.html#.Profile">Profile</a></li></ul></li><li><a href="Pages.profile.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.profile.components.html#.DetailsForm">DetailsForm</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfileImage">ProfileImage</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfilePageSkeleton">ProfilePageSkeleton</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li><li><a href="Utils.html">Utils</a><ul class='methods'><li data-type='method'><a href="Utils.html#.handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="Utils.html#.toastNotification">toastNotification</a></li></ul></li></ul><h3><a href="global.html">Global</a></h3>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">pages/chat/index.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useUserStore } from "@/store";
+import LogOutButton from "@/components/LogOutButton";
+import ProfileCard from "@/components/ProfileCard";
+import ThemeToggler from "@/components/ThemeToggler";
+import ChatList from "./components/ChatList";
+import ChatContainer from "./components/ChatContainer";
+import AddChatButton from "./components/AddChatButton";
+import NotificationDialog from "./components/NotificationDialog";
+
+/**
+ * @namespace Pages.chat
+ */
+
+/**
+ * @memberof Pages.chat
+ *
+ * @description
+ * The most important component where all major business logic work. It has Four main component as :
+ * 1. &lt;b>`Chat sidebar`&lt;/b> : sidebar that display user info at top then all chats with scrolling and at footer notifications with logout option
+ * 2. &lt;b>`Add chat button`&lt;/b> : Floating button on chat sidebar header with absolute position which allows user to search and send request to other users.
+ * 3. &lt;b>`Notification dialog`&lt;/b> : Floating bell icon at sidebar footer with absolute position responsible to open notification dialog box and allow to respond on notifications as per the notification type.
+ * 4. &lt;b>`Chat container`&lt;/b> : Main container where user can chat with other user. Header displays receivers details, main section shows conversations between two user and footer to send text.
+ *
+ * Hooks:
+ * - `useUserStore`: Zustand store hook for managing user-related information.
+ * - `useCurrentChatStore`: Zustand store hook for current chat details.
+ * - `useProfileStore`: Zustand store hook for managing profile IDs of profile page.
+ * - `useMutation`: React Query hook to update messages in database.
+ * - `useInfiniteQuery`: React Query hook to conversation from an API with auto infinite scrolling.
+ * - `useState`: React hook to handle various state variables between renders.
+ * - `useEffect`: React hook to perform side effects and keep user updated in real time.
+ *
+ * @returns {JSX.Element} Returns the rendered authentication page.
+ *
+ * @example
+ * // Usage
+ * import Chat from './chat';
+ *
+ * function App() {
+ *   return &lt;Chat />;
+ * }
+ */
+
+const Chat = () => {
+	const chatRef = useRef();
+	const chatListRef = useRef();
+	const { userInfo } = useUserStore();
+	const [isNewChat, setIsNewChat] = useState(false);
+
+	// Function to handle chat container element visibility for user
+	// ? Large devices has space for both sidebar and main container but small device don't
+	// ? So this function add and remove require tailwind classes to allow user to see the messages from other users.
+	const chatBoxVisibilityHandler = () => {
+		const classes = Array.from(chatRef.current.classList);
+		if (chatRef.current.clientWidth === 0 || chatListRef.current.clientWidth === 0) {
+			if (classes.includes("hidden")) {
+				chatRef.current.classList.remove("hidden");
+				chatListRef.current.classList.add("hidden");
+			} else {
+				chatRef.current.classList.add("hidden");
+				chatListRef.current.classList.remove("hidden");
+			}
+		}
+	};
+
+	return (
+		&lt;div className="w-screen h-screen relative md:flex flex-row-reverse gap-4">
+			{/* ----------------------------------------------------------
+				* MAIN CHATTING SECTION
+				---------------------------------------------------------- */}
+			&lt;div
+				className="hidden absolute w-full h-full px-5 md:w-[60%] md:block md:relative"
+				ref={chatRef}
+			>
+				&lt;ChatContainer chatBoxVisibilityHandler={chatBoxVisibilityHandler} />
+			&lt;/div>
+
+			{/* ----------------------------------------------------------
+				* SIDEBAR TO SHOW CHATS AND GROUPS
+				---------------------------------------------------------- */}
+
+			&lt;div className="w-full h-full  md:w-[30%] md:w-[40%] relative" ref={chatListRef}>
+				{/* ----------------------------------------------------------
+					* SIDEBAR Header
+					---------------------------------------------------------- */}
+				&lt;div className="w-full h-[15%] relative">
+					&lt;Link to="/profile">
+						&lt;div
+							onClick={(event) => event.preventDefault()}
+							className="absolute w-full h-full flex justify-end items-center gap-3 pe-3"
+						>
+							{/* ----------------------------------------------------------
+								* Button to add chat
+								---------------------------------------------------------- */}
+							&lt;div>
+								&lt;AddChatButton />
+							&lt;/div>
+
+							{/* ----------------------------------------------------------
+								* Button to change theme
+								---------------------------------------------------------- */}
+							&lt;div className="h-12 w-12 cursor-pointer">
+								&lt;ThemeToggler />
+							&lt;/div>
+						&lt;/div>
+
+						{/* ----------------------------------------------------------
+							* Header to display user's details
+					    	---------------------------------------------------------- */}
+						&lt;div className="p-5">
+							&lt;ProfileCard
+								image={userInfo?.image}
+								title={userInfo.username}
+								description={userInfo.status}
+							/>
+						&lt;/div>
+					&lt;/Link>
+				&lt;/div>
+
+				{/* ----------------------------------------------------------
+					* Chats
+					---------------------------------------------------------- */}
+
+				&lt;div className="w-full h-[70%] overflow-hidden">
+					&lt;ChatList
+						chatBoxVisibilityHandler={chatBoxVisibilityHandler}
+						isNewChat={isNewChat}
+						setIsNewChat={setIsNewChat}
+					/>
+				&lt;/div>
+
+				{/* ----------------------------------------------------------
+					* Footer to show logo, notifications and logout option
+					---------------------------------------------------------- */}
+				&lt;div className="w-full absolute bottom-0 left-0">
+					&lt;NotificationDialog setIsNewChat={setIsNewChat} />
+				&lt;/div>
+
+				&lt;div className="w-full h-[15%] flex ps-5 gap-3 items-center justify-between px-5">
+					&lt;div className="">Chatters LOGO&lt;/div>
+					&lt;div className="w-[40px] h-[40px]">
+						&lt;LogOutButton />
+					&lt;/div>
+				&lt;/div>
+			&lt;/div>
+		&lt;/div>
+	);
+};
+
+export default Chat;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri Dec 27 2024 13:42:28 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>controllers/UserControllers/getUserController.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="controllers.html">controllers</a></li><li><a href="controllers.AuthControllers.html">AuthControllers</a><ul class='methods'><li data-type='method'><a href="controllers.AuthControllers.html#.getOTP">getOTP</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.getRefreshToken">getRefreshToken</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.logIn">logIn</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.otpValidation">otpValidation</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.signUp">signUp</a></li></ul></li><li><a href="helpers.html">helpers</a><ul class='methods'><li data-type='method'><a href="helpers.html#.jwtTokenGenerator">jwtTokenGenerator</a></li></ul></li><li><a href="middlewares.html">middlewares</a><ul class='members'><li data-type='member'><a href="middlewares.html#.otpRateLimiter">otpRateLimiter</a></li><li data-type='member'><a href="middlewares.html#.otpRateLimiter">otpRateLimiter</a></li></ul><ul class='methods'><li data-type='method'><a href="middlewares.html#.verifyToken">verifyToken</a></li></ul></li><li><a href="utils.html">utils</a></li><li><a href="utils.OTPHandler.html">OTPHandler</a><ul class='methods'><li data-type='method'><a href="utils.OTPHandler.html#.OTPGenerator">OTPGenerator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.OTPValidator">OTPValidator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getRedisClient">getRedisClient</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getTotpInstance">getTotpInstance</a></li></ul></li><li><a href="utils.QueryHelpers.html">QueryHelpers</a><ul class='methods'><li data-type='method'><a href="utils.QueryHelpers.html#.userGetQueryFilter">userGetQueryFilter</a></li></ul></li><li><a href="workers.html">workers</a></li><li><a href="workers.authWorkers.html">authWorkers</a><ul class='methods'><li data-type='method'><a href="workers.authWorkers.html#.emailOtpQueue">emailOtpQueue</a></li><li data-type='method'><a href="workers.authWorkers.html#.smsOtpQueue">smsOtpQueue</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">controllers/UserControllers/getUserController.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import User from "#src/models/UserModel";
+import logger from "#src/utils/logger";
+import { ErrorResponse } from "#src/utils/responses/ErrorResponse";
+import { SuccessResponse } from "#src/utils/responses/SuccessResponse";
+
+/**
+ * &lt;h3>API to provide user's details&lt;/h3>
+ *
+ *
+ * @async
+ * @function getUserInfo
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ *
+ * @returns {SuccessResponse&lt;Object>} - Sends a response containing user data.
+ * @returns {ErrorResponse&lt;Object>} - Sends a response containing an error details.
+ *
+ * @description
+ * This function fetches user information from the database based on the user ID set by middleware.
+ * &lt;br/>&lt;b>`GET REQUEST`&lt;/b>&lt;br/>
+ * Status codes returns:
+ * - 404 for user not found.
+ * - 200 for successful response.
+ * - 500 for server error or any other error.
+ */
+
+export const getUserInfo = async (req, res) => {
+	try {
+		// Fetching the user data from database using id set by middleware
+		const user = await User.findById(req.userId)
+			.select(["-password", "-updatedAt", "-createdAt"])
+			.lean();
+
+		if (!user) {
+			return new ErrorResponse(res).send({ statusCode: 404, message: "User not fond" });
+		}
+
+		// Successful response to return the user's data
+		return new SuccessResponse(res).send({ data: user });
+	} catch (error) {
+		logger.error(error);
+		return new ErrorResponse(res).send({ error: [error], message: error.message });
+	}
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Sun Nov 10 2024 13:27:20 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
