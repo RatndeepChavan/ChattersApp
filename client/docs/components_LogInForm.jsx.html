@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/LogInForm.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Auth">Auth</a></li><li><a href="global.html#Chat">Chat</a></li><li><a href="global.html#DetailsForm">DetailsForm</a></li><li><a href="global.html#LogInForm">LogInForm</a></li><li><a href="global.html#LogOutButton">LogOutButton</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#ProfileImage">ProfileImage</a></li><li><a href="global.html#SignUpForm">SignUpForm</a></li><li><a href="global.html#getErrorMessage">getErrorMessage</a></li><li><a href="global.html#getSuccessMessage">getSuccessMessage</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#toastNotification">toastNotification</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/LogInForm.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { apiClient } from "@/lib/api-client";
+import { LOGIN_ROUTE } from "@/utils/constants.js";
+import logInValidationSchema from "@/validations/LogIn";
+import { getErrorMessage, getSuccessMessage, toastNotification } from "@/utils/helpers.js";
+import { useNavigate } from "react-router-dom";
+import { useUserStore } from "@/store";
+
+/**
+ * &lt;h3>Component to render Log In form&lt;/h3>&lt;br/>
+ * &lt;b>&lt;i>This component handles all logic regarding log in functionality&lt;/i>&lt;/b>&lt;br/>
+ * &lt;p>shadcn Form component to render the form&lt;/p>
+ * &lt;p>Yup for for form validation&lt;/p>
+ * &lt;p>shadcn Toast notification to notify user&lt;/p>
+ *
+ * @returns {} Form Component
+ */
+const LogInForm = () => {
+	const navigate = useNavigate();
+	const { setUserInfo } = useUserStore();
+
+	// Defining log in form with initial values and validation resolver
+	const logInForm = useForm({
+		defaultValues: {
+			email: "r.r@r.r",
+			password: "Ra@12345",
+		},
+
+		resolver: yupResolver(logInValidationSchema),
+	});
+
+	// Function to handle log in submit
+	const logInSubmit = async (data) => {
+		await apiClient
+			.post(
+				LOGIN_ROUTE,
+				{ ...data },
+				{ validateStatus: (status) => status === 200 || status === 302 },
+			)
+			.then((res) => {
+				// Success notification
+				const message = getSuccessMessage(res);
+				setUserInfo(res.data.data);
+				toastNotification("success", message);
+				navigate("/chat");
+			})
+			.catch((error) => {
+				// Error notification
+				const errorMessage = getErrorMessage(error);
+				toastNotification("error", errorMessage);
+			});
+	};
+
+	return (
+		&lt;Form {...logInForm}>
+			&lt;form onSubmit={logInForm.handleSubmit(logInSubmit)} className="space-y-8">
+				{/* ----------------------------------------------------------
+                    *Email Field
+                    ---------------------------------------------------------- */}
+
+				&lt;FormField
+					control={logInForm.control}
+					name="email"
+					render={({ field }) => (
+						&lt;FormItem>
+							&lt;FormControl>
+								&lt;Input
+									className="rounded-full"
+									type="email"
+									placeholder="Enter your email"
+									{...field}
+								/>
+							&lt;/FormControl>
+							&lt;FormMessage />
+						&lt;/FormItem>
+					)}
+				/>
+				{/* ----------------------------------------------------------
+                    *Password Field
+                    ---------------------------------------------------------- */}
+
+				&lt;FormField
+					control={logInForm.control}
+					name="password"
+					render={({ field }) => (
+						&lt;FormItem>
+							&lt;FormControl>
+								&lt;Input
+									className="rounded-full"
+									type="password"
+									placeholder="Enter your password"
+									{...field}
+								/>
+							&lt;/FormControl>
+							&lt;FormMessage />
+						&lt;/FormItem>
+					)}
+				/>
+				{/* ----------------------------------------------------------
+                    *Submit Button
+                    ---------------------------------------------------------- */}
+
+				&lt;Button type="submit" className="w-full rounded-full">
+					Submit
+				&lt;/Button>
+			&lt;/form>
+		&lt;/Form>
+	);
+};
+
+export default LogInForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri Oct 18 2024 19:36:51 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

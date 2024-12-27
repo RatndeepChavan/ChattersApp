@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/ProfileImge.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#Chat">Chat</a></li><li><a href="global.html#DetailsForm">DetailsForm</a></li><li><a href="global.html#LogInForm">LogInForm</a></li><li><a href="global.html#LogOutButton">LogOutButton</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#ProfileImage">ProfileImage</a></li><li><a href="global.html#getErrorMessage">getErrorMessage</a></li><li><a href="global.html#getSuccessMessage">getSuccessMessage</a></li><li><a href="global.html#toastNotification">toastNotification</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/ProfileImge.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useRef } from "react";
+/**
+ * &lt;h3>Profile Image component&lt;/h3>
+ * &lt;b>This component is responsible to display profile images.&lt;/b>&lt;br/>
+ * &lt;p>This component uses input field to accept file input and save it as base64 string&lt;/p>
+ * &lt;p>This component uses shadcn Avatar to display uploaded image&lt;/p>
+ *
+ *
+ * @param {string} props user's profile image as base64 string
+ * @returns Avatar of profile image
+ */
+const ProfileImage = (props) => {
+	const inputRef = useRef();
+	const { image, setImage } = { ...props };
+	const handleClick = () => inputRef.current.click();
+
+	/**
+	 * &lt;h3>Function for file upload&lt;/h3>
+	 * &lt;p>This function handle image uploaded by user then converts it in base64 string and displays to user&lt;/p>
+	 *
+	 * @param {*} event event occurs on input files
+	 */
+	const handleChange = (event) => {
+		const file = event.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				const encodedData = reader.result;
+				setImage(encodedData);
+			};
+			reader.readAsDataURL(file);
+		}
+	};
+
+	return (
+		&lt;div className="w-[200px] h-[200px] rounded-full cursor-pointer">
+			{/* ----------------------------------------------------------
+				* Image input 
+				---------------------------------------------------------- */}
+			&lt;input
+				type="file"
+				className="hidden"
+				ref={inputRef}
+				onChange={handleChange}
+				accept=".png, .jpg,. jpeg"
+			/>
+
+			{/* ----------------------------------------------------------
+				* Avatar
+				---------------------------------------------------------- */}
+			&lt;Avatar className="w-full h-full" onClick={handleClick}>
+				&lt;AvatarImage src={image ? image : ""} alt="image" />
+				&lt;AvatarFallback>USER&lt;/AvatarFallback>
+			&lt;/Avatar>
+		&lt;/div>
+	);
+};
+
+export default ProfileImage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Wed Nov 06 2024 15:02:58 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

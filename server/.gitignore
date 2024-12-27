@@ -1,0 +1,12 @@
+# Environmental variables
+.env
+
+# Package directory
+node_modules
+
+# Output directory
+dist
+
+# Editor directories and files
+.vscode
+.cspell*

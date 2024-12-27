@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>smsAuth - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="controllers.html">controllers</a></li><li><a href="controllers.AuthControllers.html">AuthControllers</a><ul class='methods'><li data-type='method'><a href="controllers.AuthControllers.html#.signUp">signUp</a></li></ul></li><li><a href="helpers.html">helpers</a><ul class='methods'><li data-type='method'><a href="helpers.html#.jwtTokenGenerator">jwtTokenGenerator</a></li></ul></li><li><a href="utils.html">utils</a></li><li><a href="utils.OTPHandler.html">OTPHandler</a><ul class='methods'><li data-type='method'><a href="utils.OTPHandler.html#.OTPGenerator">OTPGenerator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.OTPValidator">OTPValidator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getRedisClient">getRedisClient</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getTotpInstance">getTotpInstance</a></li></ul></li><li><a href="utils.QueryHelpers.html">QueryHelpers</a><ul class='methods'><li data-type='method'><a href="utils.QueryHelpers.html#.userGetQueryFilter">userGetQueryFilter</a></li></ul></li><li><a href="workers.html">workers</a></li><li><a href="workers.authWorkers.html">authWorkers</a></li><li><a href="workers.authWorkers.emailAuth.html">emailAuth</a><ul class='methods'><li data-type='method'><a href="workers.authWorkers.emailAuth.html#.emailOtpQueueProcessesthejobtosendanOTPemailonuseremailusingSendgrid">emailOtpQueueProcesses the job to send an OTP email on user email using Sendgrid</a></li></ul></li><li><a href="workers.authWorkers.smsAuth.html">smsAuth</a><ul class='methods'><li data-type='method'><a href="workers.authWorkers.smsAuth.html#.smsOtpQueueProcessesthejobtosendanOTPmessageonusermobilenumberviaTwilio.">smsOtpQueueProcesses the job to send an OTP message on user mobile number via Twilio.</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">smsAuth</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="workers.html">workers</a><a href="workers.authWorkers.html">.authWorkers</a>.</span>
+        
+        
+            Namespace
+        
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+
+    
+
+    <h4 class="name" id="smsAuth">smsAuth</h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="workers_authWorkers_smsAuth.worker.js.html">workers/authWorkers/smsAuth.worker.js</a>, <a href="workers_authWorkers_smsAuth.worker.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".smsOtpQueueProcessesthejobtosendanOTPmessageonusermobilenumberviaTwilio."><span class="type-signature type-signature-static">(static) </span>smsOtpQueueProcesses the job to send an OTP message on user mobile number via Twilio.<span class="signature">(job, done)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="workers_authWorkers_smsAuth.worker.js.html">workers/authWorkers/smsAuth.worker.js</a>, <a href="workers_authWorkers_smsAuth.worker.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Job object that includes data needed for sending the OTP message.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>done</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Callback to indicate job completion or error.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Thu Oct 31 2024 18:33:07 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>socket.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="SocketManager.html">SocketManager</a><ul class='methods'><li data-type='method'><a href="SocketManager.html#emitEvent">emitEvent</a></li><li data-type='method'><a href="SocketManager.html#handleConnection">handleConnection</a></li><li data-type='method'><a href="SocketManager.html#handleDisconnect">handleDisconnect</a></li><li data-type='method'><a href="SocketManager.html#initialize">initialize</a></li></ul></li><li></li></ul><h3>Namespaces</h3><ul><li><a href="controllers.html">controllers</a></li><li><a href="controllers.AuthControllers.html">AuthControllers</a><ul class='methods'><li data-type='method'><a href="controllers.AuthControllers.html#.getOTP">getOTP</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.getRefreshToken">getRefreshToken</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.logIn">logIn</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.logOut">logOut</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.otpValidation">otpValidation</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.signUp">signUp</a></li></ul></li><li><a href="controllers.ChatControllers.html">ChatControllers</a><ul class='methods'><li data-type='method'><a href="controllers.ChatControllers.html#.deleteNotification">deleteNotification</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.feedbackHandler">feedbackHandler</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.feedbackHandler">feedbackHandler</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.getChats">getChats</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.initiateChat">initiateChat</a></li></ul></li><li><a href="controllers.MessageControllers.html">MessageControllers</a><ul class='methods'><li data-type='method'><a href="controllers.MessageControllers.html#.updateConversation">updateConversation</a></li><li data-type='method'><a href="controllers.MessageControllers.html#.updateReadState">updateReadState</a></li></ul></li><li><a href="controllers.UserControllers.html">UserControllers</a><ul class='methods'><li data-type='method'><a href="controllers.UserControllers.html#.getProfileInfo">getProfileInfo</a></li><li data-type='method'><a href="controllers.UserControllers.html#.getSearchedUsers">getSearchedUsers</a></li><li data-type='method'><a href="controllers.UserControllers.html#.getUserInfo">getUserInfo</a></li><li data-type='method'><a href="controllers.UserControllers.html#.updateUser">updateUser</a></li></ul></li><li><a href="helpers.html">helpers</a><ul class='methods'><li data-type='method'><a href="helpers.html#.jwtTokenGenerator">jwtTokenGenerator</a></li><li data-type='method'><a href="helpers.html#.userObjectFilter">userObjectFilter</a></li></ul></li><li><a href="middlewares.html">middlewares</a><ul class='members'><li data-type='member'><a href="middlewares.html#.otpRateLimiter">otpRateLimiter</a></li><li data-type='member'><a href="middlewares.html#.otpRateLimiter">otpRateLimiter</a></li></ul><ul class='methods'><li data-type='method'><a href="middlewares.html#.verifyToken">verifyToken</a></li></ul></li><li><a href="utils.html">utils</a></li><li><a href="utils.OTPHandler.html">OTPHandler</a><ul class='methods'><li data-type='method'><a href="utils.OTPHandler.html#.OTPGenerator">OTPGenerator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.OTPValidator">OTPValidator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getRedisClient">getRedisClient</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getTotpInstance">getTotpInstance</a></li></ul></li><li><a href="utils.QueryHelpers.html">QueryHelpers</a><ul class='methods'><li data-type='method'><a href="utils.QueryHelpers.html#.userGetQueryFilter">userGetQueryFilter</a></li></ul></li><li><a href="workers.html">workers</a></li><li><a href="workers.authWorkers.html">authWorkers</a><ul class='methods'><li data-type='method'><a href="workers.authWorkers.html#.emailOtpQueue">emailOtpQueue</a></li><li data-type='method'><a href="workers.authWorkers.html#.smsOtpQueue">smsOtpQueue</a></li></ul></li><li><a href="workers.notificationWorkers.html">notificationWorkers</a><ul class='methods'><li data-type='method'><a href="workers.notificationWorkers.html#.chatInitiationQueue">chatInitiationQueue</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">socket.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Server as SocketIOServer } from "socket.io";
+import { ORIGIN } from "./utils/constants.js";
+import logger from "./utils/logger.js";
+
+/**
+ * @class SocketManager
+ * @description Singleton class to manage WebSocket connections and operations using Socket.IO.
+ */
+class SocketManager {
+	/** Singleton instance of SocketManager */
+	static #instance = null;
+
+	/** Socket.IO server instance */
+	#io = null;
+
+	/** Maintains O(1) lookup for user to socket ID mapping. */
+	#userSocketMap = new Map();
+
+	/** Maintains O(1) lookup for socket to user ID mapping. */
+	#socketUserMap = new Map();
+
+	//? As socket responsible for real time updates time is crucial so keep two map to avoid loop and perform the operation with O(1)
+
+	/**
+	 * @constructor
+	 * @throws {Error} Throws an error if attempting to instantiate directly when already initiated.
+	 */
+	constructor() {
+		// Prevent multiple instances of the SocketManager singleton.
+		if (SocketManager.#instance) {
+			throw new Error("Already initiated, use getInstance method to access it.");
+		}
+		SocketManager.#instance = this;
+	}
+
+	/**
+	 * @static
+	 * @method getInstance
+	 * @returns {SocketManager} Returns the singleton instance of SocketManager.
+	 */
+	static getInstance() {
+		// Instantiate the singleton instance if it doesn't already exist.
+		if (!SocketManager.#instance) {
+			SocketManager.#instance = new SocketManager();
+		}
+		return SocketManager.#instance;
+	}
+
+	/**
+	 * Initializes the Socket.IO server.
+	 * @param {Server} server The HTTP server instance to attach the Socket.IO server to.
+	 */
+	initialize(server) {
+		this.#io = new SocketIOServer(server, {
+			cors: {
+				origin: ORIGIN,
+				methods: ["GET", "POST"],
+				credentials: true,
+			},
+		});
+
+		// Listen for incoming connections and handle them.
+		this.#io.on("connection", (socket) => this.handleConnection(socket));
+	}
+
+	/**
+	 * Handles a new WebSocket connection.
+	 * @param {Socket} socket The connected socket instance.
+	 */
+	handleConnection(socket) {
+		// Extract the userId from the handshake query.
+		const userId = socket.handshake.query.userId;
+
+		if (userId) {
+			// Map the userId to the socketId for quick lookups.
+			this.#userSocketMap.set(userId, socket.id);
+
+			// Map the socketId to the userId for quick lookups.
+			this.#socketUserMap.set(socket.id, userId);
+		} else {
+			// Log an error if userId is not provided.
+			logger.error("User ID not found");
+		}
+
+		// Handle socket disconnection event.
+		socket.on("disconnect", () => this.handleDisconnect(socket.id, userId));
+	}
+
+	/**
+	 * Handles a WebSocket disconnection.
+	 * @param {string} socketId The ID of the disconnected socket.
+	 * @param {string} userId The ID of the user associated with the socket.
+	 */
+	handleDisconnect(socketId, userId) {
+		if (userId) {
+			// Remove mappings for the disconnected user and socket.
+			this.#userSocketMap.delete(userId);
+			this.#socketUserMap.delete(socketId);
+		}
+	}
+
+	/**
+	 * Emits an event to a specific user.
+	 * @param {string} userId The user ID to whom the event is to be emitted.
+	 * @param {string} eventName The name of the event to emit.
+	 * @param {event} eventData The data to send with the event.
+	 */
+	emitEvent(userId, eventName, eventData) {
+		// Retrieve the socket ID for the user.
+		const socketId = this.#userSocketMap.get(userId);
+
+		// Emit the event to the specified socket ID.
+		if (socketId) this.#io.to(socketId).emit(eventName, eventData);
+	}
+}
+
+// Create and export the singleton instance of SocketManager.
+const socketManager = SocketManager.getInstance();
+export default socketManager;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Mon Nov 25 2024 13:31:12 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

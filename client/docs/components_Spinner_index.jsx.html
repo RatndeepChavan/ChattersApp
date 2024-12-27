@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/Spinner/index.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="global.html#App">App</a></li><li><a href="Components.html">Components</a><ul class='methods'><li data-type='method'><a href="Components.html#.ArrowBackLeft">ArrowBackLeft</a></li><li data-type='method'><a href="Components.html#.FormInputField">FormInputField</a></li><li data-type='method'><a href="Components.html#.FriendRequestButton">FriendRequestButton</a></li><li data-type='method'><a href="Components.html#.LogOutButton">LogOutButton</a></li><li data-type='method'><a href="Components.html#.OTPInputField">OTPInputField</a></li><li data-type='method'><a href="Components.html#.ProfileCard">ProfileCard</a></li><li data-type='method'><a href="Components.html#.ProgressBar">ProgressBar</a></li><li data-type='method'><a href="Components.html#.Spinner">Spinner</a></li><li data-type='method'><a href="Components.html#.SubmitButton">SubmitButton</a></li><li data-type='method'><a href="Components.html#.ThemeToggler">ThemeToggler</a></li><li data-type='method'><a href="Components.html#.Timer">Timer</a></li></ul></li><li><a href="Components.Skeletons.html">Skeletons</a><ul class='methods'><li data-type='method'><a href="Components.Skeletons.html#.ProfileCardSkeleton">ProfileCardSkeleton</a></li></ul></li><li><a href="Context.html">Context</a><ul class='methods'><li data-type='method'><a href="Context.html#.SocketProvider">SocketProvider</a></li><li data-type='method'><a href="Context.html#.ThemeProvider">ThemeProvider</a></li></ul></li><li><a href="Hooks.html">Hooks</a><ul class='methods'><li data-type='method'><a href="Hooks.html#.useDebouncedQuery">useDebouncedQuery</a></li><li data-type='method'><a href="Hooks.html#.useSocketEventListener">useSocketEventListener</a></li><li data-type='method'><a href="Hooks.html#.useTheme">useTheme</a></li></ul></li><li><a href="Libs.html">Libs</a><ul class='methods'><li data-type='method'><a href="Libs.html#.refreshToken">refreshToken</a></li><li data-type='method'><a href="Libs.html#.runQueuedRequests">runQueuedRequests</a></li></ul></li><li><a href="Pages.html">Pages</a></li><li><a href="Pages.auth.html">auth</a><ul class='methods'><li data-type='method'><a href="Pages.auth.html#.Auth">Auth</a></li></ul></li><li><a href="Pages.auth.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.auth.components.html#.LogInForm">LogInForm</a></li><li data-type='method'><a href="Pages.auth.components.html#.OTPHandler">OTPHandler</a></li><li data-type='method'><a href="Pages.auth.components.html#.SignUpForm">SignUpForm</a></li></ul></li><li><a href="Pages.chat.html">chat</a><ul class='methods'><li data-type='method'><a href="Pages.chat.html#.Chat">Chat</a></li></ul></li><li><a href="Pages.chat.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.html#.AddChatButton">AddChatButton</a></li><li data-type='method'><a href="Pages.chat.components.html#.ChatList">ChatList</a></li></ul></li><li><a href="Pages.chat.components.ChatContainer.html">ChatContainer</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.ChatContainer">ChatContainer</a></li><li data-type='method'><a href="Pages.chat.components.ChatContainer.html#.MessageForm">MessageForm</a></li></ul></li><li><a href="Pages.chat.components.NotificationDialog.html">NotificationDialog</a><ul class='methods'><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationActions">NotificationActions</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.NotificationButtons">NotificationButtons</a></li><li data-type='method'><a href="Pages.chat.components.NotificationDialog.html#.Notifications">Notifications</a></li></ul></li><li><a href="Pages.profile.html">profile</a><ul class='methods'><li data-type='method'><a href="Pages.profile.html#.Profile">Profile</a></li></ul></li><li><a href="Pages.profile.components.html">components</a><ul class='methods'><li data-type='method'><a href="Pages.profile.components.html#.DetailsForm">DetailsForm</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfileImage">ProfileImage</a></li><li data-type='method'><a href="Pages.profile.components.html#.ProfilePageSkeleton">ProfilePageSkeleton</a></li></ul></li><li><a href="Providers.html">Providers</a><ul class='methods'><li data-type='method'><a href="Providers.html#.CustomClientProvider">CustomClientProvider</a></li><li data-type='method'><a href="Providers.html#.CustomRouterProvider">CustomRouterProvider</a></li><li data-type='method'><a href="Providers.html#.queryClient">queryClient</a></li></ul></li><li><a href="Utils.html">Utils</a><ul class='methods'><li data-type='method'><a href="Utils.html#.handleKeyDown">handleKeyDown</a></li><li data-type='method'><a href="Utils.html#.toastNotification">toastNotification</a></li></ul></li></ul><h3><a href="global.html">Global</a></h3>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/Spinner/index.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { memo } from "react";
+
+/**
+ * @memberof Components
+ *
+ * @description
+ * - Spinner component that displays a loading spinner.
+ *
+ * @param {Object} props - The props for the Spinner component.
+ * @param {string} [props.size='sm'] - The size of the spinner. ('sm', 'md', 'lg', 'xl', or valid custom `Tailwind Size` value).
+ * @param {string} [props.color='blue-600'] - The color of the spinner.(should be a valid `Tailwind Color`).
+ *
+ * @returns {JSX.Element} The Spinner component.
+ */
+const Spinner = (props) => {
+	const { size, color } = { ...props };
+
+	// Function to return tailwind class (width and height) based on size
+	const getSize = () => {
+		switch (size) {
+			case "sm":
+				return "w-4 h-4"; // Small size (4x4)
+			case "md":
+				return "w-6 h-6"; // Medium size (6x6)
+			case "lg":
+				return "w-8 h-8"; // Large size (8x8)
+			case "xl":
+				return "w-10 h-10"; // Extra large size (10x10)
+			default:
+				return typeof size === "number" ? `w-${size} h-${size}` : "w-2 h-2"; // ! size must be valid tailwind size
+		}
+	};
+
+	// Defining foreground color class
+	const fillColor = color ? `fill-${color}` : "fill-blue-600";
+
+	return (
+		&lt;div role="status" className="w-full h-full flex justify-center items-center">
+			&lt;svg
+				aria-hidden="true"
+				className={`inline ${getSize()} text-gray-200 animate-spin dark:text-gray-600 ${fillColor}`}
+				viewBox="0 0 100 101"
+				fill="currentColor"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				&lt;path
+					d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+					fill="currentColor"
+				/>
+				&lt;path
+					d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+					fill="currentFill"
+				/>
+			&lt;/svg>
+		&lt;/div>
+	);
+};
+
+export default memo(Spinner);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri Dec 27 2024 13:42:28 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

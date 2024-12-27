@@ -1,0 +1,30 @@
+# Environmental variables
+#.env
+
+# Docker files
+#.dockerignore
+#Dockerfile
+#docker-compose.yaml
+
+# Installed packages
+#node_modules
+
+# Git files
+#.git
+#.gitignore
+
+# Output directories
+#dist
+#build
+
+# Readme files and documentations
+#docs
+#jsdoc*
+#README*
+#*.md
+
+
+# IDE directories and files
+#.vscode
+#.cspell*
+

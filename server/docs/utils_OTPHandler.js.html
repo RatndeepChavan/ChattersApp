@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>utils/OTPHandler.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="SocketManager.html">SocketManager</a><ul class='methods'><li data-type='method'><a href="SocketManager.html#emitEvent">emitEvent</a></li><li data-type='method'><a href="SocketManager.html#handleConnection">handleConnection</a></li><li data-type='method'><a href="SocketManager.html#handleDisconnect">handleDisconnect</a></li><li data-type='method'><a href="SocketManager.html#initialize">initialize</a></li></ul></li><li></li></ul><h3>Namespaces</h3><ul><li><a href="controllers.html">controllers</a></li><li><a href="controllers.AuthControllers.html">AuthControllers</a><ul class='methods'><li data-type='method'><a href="controllers.AuthControllers.html#.getOTP">getOTP</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.getRefreshToken">getRefreshToken</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.logIn">logIn</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.logOut">logOut</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.otpValidation">otpValidation</a></li><li data-type='method'><a href="controllers.AuthControllers.html#.signUp">signUp</a></li></ul></li><li><a href="controllers.ChatControllers.html">ChatControllers</a><ul class='methods'><li data-type='method'><a href="controllers.ChatControllers.html#.deleteNotification">deleteNotification</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.feedbackHandler">feedbackHandler</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.feedbackHandler">feedbackHandler</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.getChats">getChats</a></li><li data-type='method'><a href="controllers.ChatControllers.html#.initiateChat">initiateChat</a></li></ul></li><li><a href="controllers.MessageControllers.html">MessageControllers</a><ul class='methods'><li data-type='method'><a href="controllers.MessageControllers.html#.updateConversation">updateConversation</a></li><li data-type='method'><a href="controllers.MessageControllers.html#.updateReadState">updateReadState</a></li></ul></li><li><a href="controllers.UserControllers.html">UserControllers</a><ul class='methods'><li data-type='method'><a href="controllers.UserControllers.html#.getProfileInfo">getProfileInfo</a></li><li data-type='method'><a href="controllers.UserControllers.html#.getSearchedUsers">getSearchedUsers</a></li><li data-type='method'><a href="controllers.UserControllers.html#.getUserInfo">getUserInfo</a></li><li data-type='method'><a href="controllers.UserControllers.html#.updateUser">updateUser</a></li></ul></li><li><a href="helpers.html">helpers</a><ul class='methods'><li data-type='method'><a href="helpers.html#.jwtTokenGenerator">jwtTokenGenerator</a></li><li data-type='method'><a href="helpers.html#.userObjectFilter">userObjectFilter</a></li></ul></li><li><a href="middlewares.html">middlewares</a><ul class='members'><li data-type='member'><a href="middlewares.html#.otpRateLimiter">otpRateLimiter</a></li><li data-type='member'><a href="middlewares.html#.otpRateLimiter">otpRateLimiter</a></li></ul><ul class='methods'><li data-type='method'><a href="middlewares.html#.verifyToken">verifyToken</a></li></ul></li><li><a href="utils.html">utils</a></li><li><a href="utils.OTPHandler.html">OTPHandler</a><ul class='methods'><li data-type='method'><a href="utils.OTPHandler.html#.OTPGenerator">OTPGenerator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.OTPValidator">OTPValidator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getRedisClient">getRedisClient</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getTotpInstance">getTotpInstance</a></li></ul></li><li><a href="utils.QueryHelpers.html">QueryHelpers</a><ul class='methods'><li data-type='method'><a href="utils.QueryHelpers.html#.userGetQueryFilter">userGetQueryFilter</a></li></ul></li><li><a href="workers.html">workers</a></li><li><a href="workers.authWorkers.html">authWorkers</a><ul class='methods'><li data-type='method'><a href="workers.authWorkers.html#.emailOtpQueue">emailOtpQueue</a></li><li data-type='method'><a href="workers.authWorkers.html#.smsOtpQueue">smsOtpQueue</a></li></ul></li><li><a href="workers.notificationWorkers.html">notificationWorkers</a><ul class='methods'><li data-type='method'><a href="workers.notificationWorkers.html#.chatInitiationQueue">chatInitiationQueue</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">utils/OTPHandler.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import * as OTPAuth from "otpauth";
+import { createClient } from "redis";
+import logger from "#src/utils/logger";
+
+/**
+ * @namespace utils.OTPHandler
+ */
+
+/**
+ * @memberof utils.OTPHandler
+ *
+ * @function getTotpInstance
+ *
+ * @description
+ * Function that returns a TOTP (Time-based One-Time Password) instance.
+ *
+ * @param {string} secret - cryptographic secret.
+ * @param {number} otpLength - Length of generated OTP.
+ * @param {number} otpTime - Validity period of OTP in seconds.
+ * @returns {OTPAuth.TOTP} TOTP instance.
+ */
+const getTotpInstance = (secret, otpLength, otpTime) => {
+	// Create a new TOTP instance
+	const totp = new OTPAuth.TOTP({
+		algorithm: "SHA256", // Algorithm used for HMAC function
+		digits: otpLength, // Length of the OTP
+		period: otpTime, // Validity period in seconds
+		secret: secret, // Cryptographic secret
+	});
+	return totp;
+};
+
+/**
+ * @memberof utils.OTPHandler
+ *
+ * @function getRedisClient
+ *
+ * @description
+ * Function to create Redis client instance connected to redis database.
+ *
+ * @returns {Promise&lt;RedisClient>} Connected Redis client instance.
+ */
+const getRedisClient = async () => {
+	// Create and connect to Redis client
+	const redisClient = await createClient()
+		.on("error", (error) => logger.error(error))
+		.connect();
+	return redisClient;
+};
+
+/**
+ * @memberof utils.OTPHandler
+ *
+ * @function OTPGenerator
+ *
+ * @description
+ * Generates a TOTP (Time-based One-Time Password) and stores the associated secret in Redis.
+ *
+ * @param {object} object - object having entries with userId, otpLength, otpTime as keys.
+ * @param {string} object.userId - Unique user identifier for retrieving OTP secret.
+ * @param {number} [object.otpLength=6] - Length of the generated OTP.
+ * @param {number} [object.otpTime=30] - Validity period of the OTP in seconds.
+ * @returns {string} The generated OTP.
+ * @throws {Error} Throws error if userId is not provided.
+ */
+export const OTPGenerator = async ({ userId = undefined, otpLength = 6, otpTime = 30 } = {}) => {
+	// Ensure userId is provided
+	if (!userId) {
+		throw Error("Please provide userId to generate OTP");
+	}
+
+	// Cryptographically secure random secret key
+	const secret = new OTPAuth.Secret({ size: 20 }).base32;
+
+	// Create TOTP instance using the secret
+	const totp = getTotpInstance(secret, otpLength, otpTime);
+
+	// Store secret in Redis with an expiration time equal to the OTP period
+	const redisClient = await getRedisClient();
+	await redisClient.set(userId, secret, { EX: otpTime });
+
+	// Generate and return the OTP
+	const otp = totp.generate();
+	return otp;
+};
+
+/**
+ * @memberof utils.OTPHandler
+ *
+ * @function OTPValidator
+ *
+ * @description
+ * Validates the provided OTP against the stored TOTP secret for the user.
+ *
+ * @param {object} object - object having entries with otp, userId, otpLength, otpTime as keys.
+ * @param {string} object.otp - The OTP to validate.
+ * @param {string} object.userId - Unique user identifier for retrieving OTP secret.
+ * @param {number} [object.otpLength=6] - Length of the generated OTP.
+ * @param {number} [object.otpTime=30] - Validity period of the OTP in seconds.
+ * @returns {Promise&lt;boolean|undefined>} `true` if the OTP is valid, otherwise `undefined`.
+ * @throws {Error} Throws error if userId or otp is not provided.
+ */
+export const OTPValidator = async ({
+	otp = undefined,
+	userId = undefined,
+	otpLength = 6,
+	otpTime = 30,
+} = {}) => {
+	// Ensure userId is provided
+	if (!userId) {
+		throw Error("Please provide userId to validate OTP");
+	}
+
+	// Ensure otp is provided
+	if (!otp) {
+		throw Error("Please provide otp to validate OTP");
+	}
+
+	// Retrieve Redis client and fetch stored secret using userId
+	const redisClient = await getRedisClient();
+	const secret = await redisClient.get(userId);
+
+	// If no secret is found for the user, return undefined (validation fails)
+	if (!secret) {
+		return;
+	}
+
+	// Creating TOTP instance
+	const totp = getTotpInstance(secret, otpLength, otpTime);
+
+	try {
+		// Validating the OTP
+		return totp.validate({ token: otp });
+	} catch (error) {
+		logger.error(error);
+		return;
+	}
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Mon Nov 25 2024 13:31:13 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>controllers/AuthControllers/signUpController.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="utils.html">utils</a></li><li><a href="utils.OTPHandler.html">OTPHandler</a><ul class='methods'><li data-type='method'><a href="utils.OTPHandler.html#.OTPGenerator">OTPGenerator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.OTPValidator">OTPValidator</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getRedisClient">getRedisClient</a></li><li data-type='method'><a href="utils.OTPHandler.html#.getTotpInstance">getTotpInstance</a></li></ul></li><li><a href="utils.QueryHelpers.html">QueryHelpers</a></li><li><a href="utils.QueryHelpers.userGetQueryFilter.html">userGetQueryFilter</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">controllers/AuthControllers/signUpController.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import User from "#src/models/UserModel";
+import logger from "#src/utils/logger";
+import { ErrorResponse } from "#src/utils/responses/ErrorResponse";
+import { SuccessResponse } from "#src/utils/responses/SuccessResponse";
+import { userGetQueryFilter } from "#src/utils/queryHelpers/userQueryFilter";
+import { OTPGenerator } from "#src/utils/OTPHandler";
+import { JWT_ACCESS_TOKEN_AGE, JWT_REFRESH_TOKEN_AGE } from "#src/utils/constants";
+import { jwtTokenGenerator } from "#src/helpers/jwtTokenGenerator";
+import { smsOtpQueue } from "#src/workers/authWorkers/smsAuth.worker";
+import { emailOtpQueue } from "#src/workers/authWorkers/emailAuth.worker";
+
+/**
+ * &lt;h3>Controller function to handle user signup requests&lt;/h3>
+ * *`&lt;b>POST REQUEST&lt;/b>`
+ * @description
+ * -It verifies user-provided details, checks if the user already exists
+ * creates a new user, generates JWT tokens, and sends an OTP for verification.
+ *
+ * @async
+ * @function signUp
+ * @param {Request} req request sent from client
+ * @param {Response} res response generated from server
+ * @returns {Response}
+ * &lt;p>&lt;i>email or password not given -> 400 (Email or Password is required.)&lt;/i>&lt;/p>
+ * &lt;p>&lt;i>fond an previous user with same email -> 409 ("EMAIL ALREADY EXIST")&lt;/i>&lt;/p>
+ * &lt;p>&lt;i>any server error -> 500 ("INTERNAL SERVER ERROR")&lt;/i>&lt;/p>
+ * &lt;p>&lt;i>new user created -> 201 ("NEW USER CREATED")&lt;/i>&lt;/p>
+ */
+export const signUp = async (req, res) => {
+	try {
+		// Extracting details from request
+		const { emailOrMobile, password } = req.body;
+
+		// Verifying if required details are provided
+		if (!emailOrMobile || !password) {
+			return new ErrorResponse(res).send({
+				statusCode: 400,
+				message: "Invalid data received. Please resubmit the form",
+			});
+		}
+
+		// Filtering email and mobile
+		const userCredentials = userGetQueryFilter(emailOrMobile);
+
+		// Checking whether user already exits with provided email or mobile
+		const doesUserExist = await User.findOne(userCredentials);
+		if (doesUserExist) {
+			// Generating valid informative error message if user exist with given credentials
+			const errorMessage = `${userCredentials.email ? "Email" : "Mobile"} : ${
+				userCredentials.email || userCredentials.mobile
+			} already exists`;
+
+			return new ErrorResponse(res).send({
+				statusCode: 409,
+				message: errorMessage,
+			});
+		}
+
+		// Adding the user in database
+		const user = await User.create({ ...userCredentials, password });
+
+		// Generating jwt cookie from user's details
+		const { access_token, refresh_token } = jwtTokenGenerator(user["_id"]);
+
+		// Setting up the cookie in client's storage
+		res.cookie("access_token", access_token, {
+			maxAge: JWT_ACCESS_TOKEN_AGE,
+			secure: true,
+			sameSite: "None",
+			httpOnly: true,
+		});
+		res.cookie("refresh_token", refresh_token, {
+			maxAge: JWT_REFRESH_TOKEN_AGE,
+			secure: true,
+			sameSite: "None",
+			httpOnly: true,
+		});
+
+		// Generating OTP to verify user credentials
+		const OTP = await OTPGenerator({ userId: user["_id"] });
+
+		// Sending otp to user
+		if (userCredentials.email) {
+			emailOtpQueue.add({ OTP, action: "signup", receiver: userCredentials.email });
+		} else {
+			smsOtpQueue.add({ OTP, action: "signup", receiver: userCredentials.mobile });
+		}
+
+		// Returning success response
+		return new SuccessResponse(res).send({
+			statusCode: 201,
+			data: user,
+			message: "NEW USER CREATED",
+		});
+	} catch (error) {
+		// Logging the error details
+		logger.error(error);
+		return new ErrorResponse(res).send({ statusCode: 500, message: "INTERNAL SERVER ERROR" });
+	}
+};
+
+// !---------------------------------------------------------------------
+// ! TEMPORARY
+// const emailData = await sendEmail(OTP);
+// logger.http({ emailData });
+// const validation1 = await OTPValidator({ userId: "123", otp: OTP, otpTime: 3 });
+// logger.warn({ validation1 });
+// sleep(5000);
+// const validation2 = await OTPValidator({ userId: "123", otp: OTP, otpTime: 3 });
+// logger.warn({ validation2 });
+// !---------------------------------------------------------------------
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Thu Oct 31 2024 13:32:56 GMT+0530 (India Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
