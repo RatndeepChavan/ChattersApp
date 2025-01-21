@@ -2,6 +2,7 @@ import { RouterProvider, Navigate, createBrowserRouter } from "react-router-dom"
 import Auth from "@/pages/auth";
 import Chat from "@/pages/chat";
 import Profile from "@/pages/profile";
+import OTPHandler from "@/pages/OTPHandler";
 import { useUserStore } from "@/store";
 import { ThemeProvider } from "@/context/ThemeProvider";
 
@@ -28,6 +29,10 @@ const CustomRouterProvider = ({ children }) => {
 		{
 			path: "/auth",
 			element: userInfo ? <Navigate to="/chat" /> : <Auth />,
+		},
+		{
+			path: "/otp",
+			element: userInfo ? <Navigate to="/chat" /> : <OTPHandler />,
 		},
 		{
 			path: "/profile",

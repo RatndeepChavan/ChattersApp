@@ -17971,3 +17971,16 @@
 2024-12-25 13:03:52 [31merror[39m : [31mOperation `users.findOne()` buffering timed out after 10000ms[39m
 2024-12-25 13:17:10 [31merror[39m : [31mOperation `users.aggregate()` buffering timed out after 10000ms[39m
 2024-12-25 13:17:11 [31merror[39m : [31mOperation `messages.find()` buffering timed out after 10000ms[39m
+2025-01-14 18:22:50 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:22:54 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:22:58 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:23:00 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:23:03 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:24:57 [31merror[39m : [31mConnection timeout[39m
+2025-01-14 18:25:02 [31merror[39m : [31mConnection timeout[39m
+2025-01-14 18:25:07 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:00 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:05 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:10 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:15 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-15 01:34:19 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m

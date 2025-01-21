@@ -88,14 +88,14 @@ const Profile = () => {
 	// Loading or fetching state ui
 	if (isLoading && isFetching) {
 		return (
-			<div className="h-screen w-screen border border-2 border-red">
+			<div className="h-screen h-svh w-screen border border-2 border-red">
 				<ProfilePageSkeleton />
 			</div>
 		);
 	}
 
 	return (
-		<div className="h-screen w-screen flex flex-col items-center justify-center">
+		<div className="h-screen h-svh w-screen flex flex-col items-center justify-center">
 			<div className="w-[70%] h-[80%] relative">
 				{/* ----------------------------------------------------------
 					* Back to chat Button

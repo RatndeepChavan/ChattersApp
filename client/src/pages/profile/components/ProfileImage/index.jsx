@@ -3,6 +3,7 @@ import { useRef } from "react";
 
 // Define allowed file types in a separate array for readability
 const ALLOWED_FILE_TYPE = ["image/png", "image/jpeg"];
+const ALLOWED_FILE_SIZE = 1000000; // In bytes (1mb)
 
 /**
  * @memberof Pages.profile.components
@@ -31,8 +32,12 @@ const ProfileImage = (props) => {
 		const file = event.target.files[0];
 
 		if (file) {
+			if (ALLOWED_FILE_SIZE < file.size) {
+				// Check for image size
+				alert("Please upload file less than 900KB.");
+			}
 			// Check for supported image types
-			if (ALLOWED_FILE_TYPE.includes(file.type)) {
+			else if (ALLOWED_FILE_TYPE.includes(file.type)) {
 				// Convert file to base64
 				const reader = new FileReader();
 				reader.onloadend = () => {

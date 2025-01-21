@@ -34,14 +34,16 @@ const LogOutButton = () => {
 	const { mutate, isPending } = useMutation({
 		mutationFn: logOut,
 		onSuccess: (response) => {
-			// Notify user of success.
-			toastNotification("success", response.message);
-
 			// Clear all states.
 			setUserInfo(undefined);
 			setProfileId(undefined);
 			setCurrentChat(undefined);
-			navigate("/auth");
+
+			// Notify user of success.
+			toastNotification("success", response.message);
+
+			// Navigate to home page
+			navigate("/", { replace: true });
 		},
 	});
 

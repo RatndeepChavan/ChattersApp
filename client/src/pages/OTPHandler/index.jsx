@@ -1,6 +1,5 @@
 import {
 	AlertDialog,
-	AlertDialogCancel,
 	AlertDialogContent,
 	AlertDialogDescription,
 	AlertDialogHeader,
@@ -17,14 +16,15 @@ import OTPInputField from "@/components/OTPInputField";
 import { useMutation } from "@tanstack/react-query";
 import apiClient from "@/lib/api-client";
 import { useProfileStore, useUserStore } from "@/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GET_OTP_ROUTE, VALIDATE_OTP_ROUTE } from "@/utils/constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EmailOrMobileFieldValidation from "@/validations/EmailOrMobileFieldValidation";
 import { handleKeyDown } from "@/utils/helpers";
+import ArrowBackLeft from "@/components/ArrowBackLeft";
 
 /**
- * @memberof Pages.auth.components
+ * @memberof Pages
  *
  * @description
  * - Handles OTP-based authentication and user verification.
@@ -45,16 +45,14 @@ import { handleKeyDown } from "@/utils/helpers";
  * @returns {JSX.Element}  JSX element representing the SignUpForm component.
  *
  */
-const OTPHandler = (props) => {
-	const { isOpen, onClose, emailOrMobile } = { ...props };
-
+const OTPHandler = () => {
 	// OTP validation time in seconds
 	const OTP_VALIDATION_TIME = 30; // in sec
 
 	// Reducer Initial state
 	const initialState = {
-		userEmailOrMobile: emailOrMobile,
-		isDisable: Boolean(emailOrMobile),
+		userEmailOrMobile: localStorage.getItem("emailOrMobile"),
+		isResendDisabled: Boolean(localStorage.getItem("emailOrMobile")),
 		timerKey: 0,
 	};
 
@@ -62,12 +60,13 @@ const OTPHandler = (props) => {
 	const reducer = (state, action) => {
 		switch (action.type) {
 			case "ENABLE_RESEND":
-				return { ...state, isDisable: false };
+				return { ...state, isResendDisabled: false };
 			case "DISABLE_RESEND":
-				return { ...state, isDisable: true };
+				return { ...state, isResendDisabled: true };
 			case "RESET_TIMER":
 				return { ...state, timerKey: state.timerKey + 1 };
 			case "SET_EMAIL_OR_MOBILE":
+				localStorage.setItem("emailOrMobile", action.payload);
 				return { ...state, userEmailOrMobile: action.payload };
 			default:
 				return state;
@@ -79,10 +78,18 @@ const OTPHandler = (props) => {
 	const { setProfileId } = useProfileStore();
 	const navigate = useNavigate();
 
+	// Check open state of OTPHandler
+	useEffect(() => {
+		const isOTPDialogOpen = Boolean(JSON.parse(localStorage.getItem("isOTPDialogOpen")));
+		if (!isOTPDialogOpen) {
+			navigate("/auth");
+		}
+	}, [navigate]);
+
 	// Initializing form with default values and validations
 	const OTPForm = useForm({
 		defaultValues: {
-			emailOrMobile: emailOrMobile || "",
+			emailOrMobile: state.userEmailOrMobile,
 			otp: "",
 		},
 
@@ -103,7 +110,11 @@ const OTPHandler = (props) => {
 	const validateOTP = async (data) => apiClient.post(VALIDATE_OTP_ROUTE, data);
 
 	// Mutation for sending OTP
-	const { mutate: sendOTP, isPending: isSendingOTP } = useMutation({
+	const {
+		mutate: sendOTP,
+		isPending: isSendingOTP,
+		isError,
+	} = useMutation({
 		mutationFn: sendOTPRequest,
 		onMutate: () => {
 			dispatch({ type: "DISABLE_RESEND" });
@@ -123,6 +134,9 @@ const OTPHandler = (props) => {
 			const userData = response.data.data;
 			setUserInfo(userData);
 			setProfileId(userData["_id"]);
+			localStorage.setItem("isOTPDialogOpen", false);
+			localStorage.setItem("emailOrMobile", "");
+			localStorage.setItem("OTPTimer", 0);
 			navigate("/chat");
 		},
 	});
@@ -141,29 +155,39 @@ const OTPHandler = (props) => {
 	};
 
 	return (
-		<AlertDialog open={isOpen} onOpenChange={onClose}>
+		<AlertDialog open={true}>
 			<AlertDialogContent>
+				<Link
+					className="w-[40px] h-[40px] border border-solid"
+					onClick={() => navigate("/auth")}
+				>
+					<ArrowBackLeft />
+				</Link>
+
 				{/* ----------------------------------------------------------
 					*Alert Header
 					---------------------------------------------------------- */}
 
 				<AlertDialogHeader className="flex-row justify-between items-center">
 					<AlertDialogTitle>
-						{emailOrMobile ? "Verify Email/Mobile" : "Log in via OTP"}
+						{state.userEmailOrMobile ? "Verify Email/Mobile" : "Log in via OTP"}
 					</AlertDialogTitle>
-					<AlertDialogCancel>X</AlertDialogCancel>
 				</AlertDialogHeader>
 
 				<AlertDialogDescription className="text-destructive text-xs italic font-semibold">
-					{state.userEmailOrMobile && "*Only numerical input is allowed"}
+					{state.userEmailOrMobile &&
+						!isSendingOTP &&
+						!isError &&
+						"*Only numerical input is allowed"}
 				</AlertDialogDescription>
+
 				<Form {...OTPForm}>
 					<form
 						className="w-full space-y-6"
 						onSubmit={OTPForm.handleSubmit(handleSubmit)}
 						onKeyDown={(event) => handleKeyDown(event, isSendingOTP || isVerifyingOTP)}
 					>
-						{state.userEmailOrMobile ? (
+						{state.userEmailOrMobile && !isSendingOTP && !isError ? (
 							/* ----------------------------------------------------------
 								*OTP field
 								---------------------------------------------------------- */
@@ -178,7 +202,9 @@ const OTPHandler = (props) => {
 									<span className="text-destructive font-bold">
 										{"Valid till "}
 										<Timer
-											startTime={OTP_VALIDATION_TIME}
+											startTime={
+												state.isResendDisabled ? OTP_VALIDATION_TIME : 0
+											}
 											key={state.timerKey}
 										/>
 									</span>
@@ -196,7 +222,7 @@ const OTPHandler = (props) => {
 												isResend: true,
 											});
 										}}
-										disabled={state.isDisable}
+										disabled={state.isResendDisabled}
 									>
 										Resend OTP
 									</Button>
@@ -212,7 +238,7 @@ const OTPHandler = (props) => {
 									onClick={() => {
 										dispatch({
 											type: "SET_EMAIL_OR_MOBILE",
-											payload: undefined,
+											payload: "",
 										});
 										OTPForm.reset({ otp: "", emailOrMobile: "" });
 									}}

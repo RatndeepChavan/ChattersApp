@@ -66,7 +66,7 @@ const Chat = () => {
 	};
 
 	return (
-		<div className="w-screen h-screen relative md:flex flex-row-reverse gap-4">
+		<div className="h-screen h-svh w-screen relative md:flex flex-row-reverse gap-4">
 			{/* ----------------------------------------------------------
 				* MAIN CHATTING SECTION
 				---------------------------------------------------------- */}

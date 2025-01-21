@@ -13,7 +13,11 @@ import { useEffect, useState } from "react";
  */
 const Timer = (props) => {
 	const { startTime } = { ...props };
-	const [timer, setTimer] = useState(startTime);
+	const [timer, setTimer] = useState(
+		(JSON.parse(localStorage.getItem("isOTPDialogOpen")) &&
+			JSON.parse(localStorage.getItem("OTPTimer"))) ||
+			startTime,
+	);
 
 	useEffect(() => {
 		// Setting an interval to decrement timer every second
@@ -24,6 +28,12 @@ const Timer = (props) => {
 		// Clear the interval on component unmount
 		return () => clearInterval(timerInterval);
 	}, []);
+
+	useEffect(() => {
+		if (timer) {
+			localStorage.setItem("OTPTimer", timer > 3 ? timer : 0);
+		}
+	}, [timer]);
 
 	// Function that accepts seconds(type:number) and convert it to MM:SS string format.
 	const formatTime = (seconds) => {

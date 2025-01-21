@@ -43,17 +43,12 @@ const getTotpInstance = (secret, otpLength, otpTime) => {
  */
 const getRedisClient = async () => {
 	// Create and connect to Redis client
-	const redisClient = await createClient({
-		legacyMode: true,
+	const redisClient = createClient({
 		socket: {
 			host: REDIS_HOST,
 			port: REDIS_PORT,
 		},
-	})
-		.on("error", (error) => {
-			logger.error(error);
-		})
-		.connect();
+	});
 
 	return redisClient;
 };
@@ -69,11 +64,11 @@ const getRedisClient = async () => {
  * @param {object} object - object having entries with userId, otpLength, otpTime as keys.
  * @param {string} object.userId - Unique user identifier for retrieving OTP secret.
  * @param {number} [object.otpLength=6] - Length of the generated OTP.
- * @param {number} [object.otpTime=30] - Validity period of the OTP in seconds.
+ * @param {number} [object.otpTime=40] - Validity period of the OTP in seconds.
  * @returns {string} The generated OTP.
  * @throws {Error} Throws error if userId is not provided.
  */
-export const OTPGenerator = async ({ userId = undefined, otpLength = 6, otpTime = 30 } = {}) => {
+export const OTPGenerator = async ({ userId = undefined, otpLength = 6, otpTime = 40 } = {}) => {
 	// Ensure userId is provided
 	if (!userId) {
 		throw Error("Please provide userId to generate OTP");
@@ -86,13 +81,25 @@ export const OTPGenerator = async ({ userId = undefined, otpLength = 6, otpTime 
 	// Create TOTP instance using the secret
 	const totp = getTotpInstance(secret, otpLength, otpTime);
 
-	// Store secret in Redis with an expiration time equal to the OTP period
+	// Create redis instance
 	const redisClient = await getRedisClient();
-	await redisClient.set(stringId, secret, "EX", otpTime);
 
-	// Generate and return the OTP
-	const otp = totp.generate();
-	return otp;
+	try {
+		// Connect redis
+		await redisClient.connect();
+
+		// Store secret in Redis with an expiration time equal to the OTP period
+		await redisClient.set(stringId, secret);
+		await redisClient.expire(stringId, otpTime);
+
+		// Generate and return the OTP
+		const otp = totp.generate();
+		return otp;
+	} catch (error) {
+		logger.error({ error });
+	} finally {
+		await redisClient.disconnect();
+	}
 };
 
 /**
@@ -107,7 +114,7 @@ export const OTPGenerator = async ({ userId = undefined, otpLength = 6, otpTime 
  * @param {string} object.otp - The OTP to validate.
  * @param {string} object.userId - Unique user identifier for retrieving OTP secret.
  * @param {number} [object.otpLength=6] - Length of the generated OTP.
- * @param {number} [object.otpTime=30] - Validity period of the OTP in seconds.
+ * @param {number} [object.otpTime=40] - Validity period of the OTP in seconds.
  * @returns {Promise<boolean|undefined>} `true` if the OTP is valid, otherwise `undefined`.
  * @throws {Error} Throws error if userId or otp is not provided.
  */
@@ -115,7 +122,7 @@ export const OTPValidator = async ({
 	otp = undefined,
 	userId = undefined,
 	otpLength = 6,
-	otpTime = 30,
+	otpTime = 40,
 } = {}) => {
 	// Ensure userId is provided
 	if (!userId) {
@@ -129,21 +136,26 @@ export const OTPValidator = async ({
 
 	// Retrieve Redis client and fetch stored secret using userId
 	const redisClient = await getRedisClient();
-	const secret = await redisClient.get(userId);
-
-	// If no secret is found for the user, return undefined (validation fails)
-	if (!secret) {
-		return;
-	}
-
-	// Creating TOTP instance
-	const totp = getTotpInstance(secret, otpLength, otpTime);
 
 	try {
+		// Connect redis
+		await redisClient.connect();
+		const secret = await redisClient.get(userId);
+
+		if (!secret) {
+			return "OTP Expired";
+		}
+
+		// Creating TOTP instance
+		const totp = getTotpInstance(secret, otpLength, otpTime);
+
 		// Validating the OTP
-		return totp.validate({ token: otp });
+		const isValid = totp.validate({ token: otp, window: 1 });
+
+		return typeof isValid === "number" ? "Valid OTP" : "Invalid OTP";
 	} catch (error) {
-		logger.error(error);
-		return;
+		logger.error({ error });
+	} finally {
+		await redisClient.disconnect();
 	}
 };

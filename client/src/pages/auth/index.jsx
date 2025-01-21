@@ -47,6 +47,13 @@ const Auth = () => {
 	const { userInfo, setUserInfo } = useUserStore();
 	const { setProfileId } = useProfileStore();
 
+	// Update otpHandler state
+	useEffect(() => {
+		localStorage.setItem("isOTPDialogOpen", false);
+		localStorage.setItem("emailOrMobile", "");
+		localStorage.setItem("OTPTimer", 0);
+	}, []);
+
 	// Query function to fetch user data
 	const fetchUserData = async () => {
 		const response = await apiClient.get(GET_USER_INFO_ROUTE);
@@ -80,7 +87,7 @@ const Auth = () => {
 	// * Loading component
 	if (isPending) {
 		return (
-			<div className="h-screen w-screen flex items-center justify-center">
+			<div className="h-screen h-svh w-screen flex items-center justify-center">
 				<ProgressBar
 					text="Initializing App..."
 					textClass="mb-5 font-2xl font-bold"
@@ -92,7 +99,7 @@ const Auth = () => {
 
 	// *COMPONENT TO RENDER LOGIN AND SIGN-UP FORM
 	return (
-		<div className={`h-screen w-screen flex items-center justify-center`}>
+		<div className="h-screen h-svh w-screen flex items-center justify-center">
 			<div className="h-[90%] border-2 border-info text-opacity-90 shadow-2xl w-4/5 md:w-[90vw] lg:w-[70vw] xl:w-[60vw] rounded-3xl">
 				<div className="h-full w-[80%] mx-auto">
 					{/* ----------------------------------------------------------

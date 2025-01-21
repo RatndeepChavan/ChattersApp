@@ -46124,3 +46124,46 @@
 [33m    }[39m
 [33m  ][39m
 [33m}[39m
+2025-01-13 21:53:32 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-13 21:53:47 [32minfo[39m : [32mDatabase connected[39m
+2025-01-14 18:18:01 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-14 18:18:15 [32minfo[39m : [32mDatabase connected[39m
+2025-01-14 18:22:50 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:22:54 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:22:58 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:23:00 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:23:03 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-14 18:23:07 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-14 18:23:20 [32minfo[39m : [32mDatabase connected[39m
+2025-01-14 18:24:25 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-14 18:24:39 [32minfo[39m : [32mDatabase connected[39m
+2025-01-14 18:24:57 [31merror[39m : [31mConnection timeout[39m
+2025-01-14 18:25:02 [31merror[39m : [31mConnection timeout[39m
+2025-01-14 18:25:07 [31merror[39m : [31mConnection timeout[39m
+2025-01-14 18:25:12 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-14 18:25:25 [32minfo[39m : [32mDatabase connected[39m
+2025-01-14 18:25:41 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-14 18:25:57 [32minfo[39m : [32mDatabase connected[39m
+2025-01-15 01:26:35 [32minfo[39m : [32mserver is running at : 8888 and request origin must be : http://frontend:3000[39m
+2025-01-15 01:26:48 [32minfo[39m : [32mDatabase connected[39m
+2025-01-15 01:33:11 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-15 01:33:25 [32minfo[39m : [32mDatabase connected[39m
+2025-01-15 01:34:00 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:05 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:10 [31merror[39m : [31mConnection timeout[39m
+2025-01-15 01:34:15 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-15 01:34:19 [31merror[39m : [31mgetaddrinfo ENOTFOUND redis[39m
+2025-01-15 01:34:24 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-15 01:34:38 [32minfo[39m : [32mDatabase connected[39m
+2025-01-15 01:38:21 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-15 01:38:34 [32minfo[39m : [32mDatabase connected[39m
+2025-01-15 02:27:54 [32minfo[39m : [32mserver is running at : 8888 and request origin must be : http://frontend:3000[39m
+2025-01-15 02:28:08 [32minfo[39m : [32mDatabase connected[39m
+2025-01-16 12:43:48 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-16 12:44:02 [32minfo[39m : [32mDatabase connected[39m
+2025-01-16 21:17:01 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-16 21:17:17 [32minfo[39m : [32mDatabase connected[39m
+2025-01-16 21:41:35 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-16 21:41:49 [32minfo[39m : [32mDatabase connected[39m
+2025-01-17 00:52:25 [32minfo[39m : [32mserver is running at : 8000 and request origin must be : http://localhost:5173[39m
+2025-01-17 00:52:40 [32minfo[39m : [32mDatabase connected[39m

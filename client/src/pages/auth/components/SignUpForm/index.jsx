@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Form } from "@/components/ui/form";
@@ -8,8 +7,8 @@ import signUpValidationSchema from "@/validations/SignUp";
 import { useMutation } from "@tanstack/react-query";
 import FormInputField from "@/components/FormInputField";
 import SubmitButton from "@/components/SubmitButton";
-import OTPHandler from "@/pages/auth/components/OTPHandler";
 import { handleKeyDown } from "@/utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 /**
  * @memberof Pages.auth.components
@@ -27,8 +26,7 @@ import { handleKeyDown } from "@/utils/helpers";
  */
 
 const SignUpForm = () => {
-	const [isOTPDialogOpen, setOTPDialogOpen] = useState(false);
-	const [userEmailOrMobile, setUserEmailOrMobile] = useState("");
+	const navigate = useNavigate();
 
 	// Defining sign up form with initial values and validation resolver
 	const signUpForm = useForm({
@@ -47,29 +45,22 @@ const SignUpForm = () => {
 
 		// On successful response navigate to profile page
 		onSuccess: () => {
-			setOTPDialogOpen(true);
+			localStorage.setItem("isOTPDialogOpen", true);
+			navigate("/otp");
+		},
+		onError: () => {
+			localStorage.setItem("emailOrMobile", "");
 		},
 	});
 
 	// Wrapper function to handle form submission
 	const handleSubmit = (data) => {
-		setUserEmailOrMobile(data.emailOrMobile);
+		localStorage.setItem("emailOrMobile", data.emailOrMobile);
 		mutate(data);
 	};
 
 	return (
 		<>
-			{/* ----------------------------------------------------------
-				* OTP component to verify email/mobile
-				---------------------------------------------------------- */}
-			{isOTPDialogOpen && (
-				<OTPHandler
-					emailOrMobile={userEmailOrMobile}
-					isOpen={isOTPDialogOpen}
-					onClose={() => setOTPDialogOpen(false)}
-				/>
-			)}
-
 			{/* ----------------------------------------------------------
 				* Sign Up Form
 				---------------------------------------------------------- */}

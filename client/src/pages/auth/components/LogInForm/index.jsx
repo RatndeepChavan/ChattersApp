@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Form } from "@/components/ui/form";
@@ -11,7 +10,6 @@ import { useProfileStore, useUserStore } from "@/store";
 import { useMutation } from "@tanstack/react-query";
 import FormInputField from "@/components/FormInputField";
 import SubmitButton from "@/components/SubmitButton";
-import OTPHandler from "@/pages/auth/components/OTPHandler";
 import { handleKeyDown } from "@/utils/helpers";
 
 /**
@@ -33,7 +31,6 @@ const LogInForm = () => {
 	const navigate = useNavigate();
 	const { setUserInfo } = useUserStore();
 	const { setProfileId } = useProfileStore();
-	const [isOTPDialogOpen, setOTPDialogOpen] = useState(false);
 
 	// Defining log in form with initial values and validation resolver
 	const logInForm = useForm({
@@ -53,8 +50,9 @@ const LogInForm = () => {
 		onSuccess: (response) => {
 			const userData = response.data.data;
 			if (!userData) {
-				setOTPDialogOpen(true);
 				toastNotification("info", "Email / Mobile verification is pending");
+				localStorage.setItem("isOTPDialogOpen", true);
+				navigate("/otp");
 			} else {
 				setUserInfo(userData);
 				setProfileId(userData["_id"]);
@@ -62,11 +60,21 @@ const LogInForm = () => {
 				navigate("/chat");
 			}
 		},
+		onError: () => {
+			localStorage.setItem("emailOrMobile", "");
+		},
 	});
 
 	// Wrapper function to handle form submission
 	const handleSubmit = (data) => {
+		localStorage.setItem("emailOrMobile", data.emailOrMobile);
 		mutate(data);
+	};
+
+	// OTP login handler
+	const handleOTPLogin = () => {
+		localStorage.setItem("isOTPDialogOpen", true);
+		navigate("/otp");
 	};
 
 	return (
@@ -109,13 +117,9 @@ const LogInForm = () => {
 				*OTP Handler
 				---------------------------------------------------------- */}
 
-			<div className="mt-3 cursor-pointer" onClick={() => setOTPDialogOpen(true)}>
+			<div className="mt-3 cursor-pointer" onClick={handleOTPLogin}>
 				Log In via OTP
 			</div>
-
-			{isOTPDialogOpen && (
-				<OTPHandler isOpen={isOTPDialogOpen} onClose={() => setOTPDialogOpen(false)} />
-			)}
 		</>
 	);
 };

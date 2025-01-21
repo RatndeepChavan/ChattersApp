@@ -29,10 +29,14 @@ export const JWT_ACCESS_TOKEN_AGE = new Function(`return ${process.env.JWT_ACCES
 export const JWT_REFRESH_TOKEN_AGE = new Function(`return ${process.env.JWT_REFRESH_TOKEN_AGE}`)();
 
 // JWT cookie setting
+export const SECURE_COOKIE = process.env.SECURE_COOKIE === "true";
+export const SAMESITE_COOKIE = process.env.SAMESITE_COOKIE;
+export const HTTPONLY_COOKIE = process.env.HTTPONLY_COOKIE === "true";
+
 export const COOKIE_OPTIONS = {
-	secure: true,
-	sameSite: "None",
-	httpOnly: true,
+	secure: SECURE_COOKIE,
+	sameSite: SAMESITE_COOKIE,
+	httpOnly: HTTPONLY_COOKIE,
 };
 
 // Twilio credentials

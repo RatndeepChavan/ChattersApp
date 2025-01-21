@@ -43,7 +43,8 @@ export const validateOTP = async (req, res) => {
 
 		// Validating request body
 		const isValidEmailOrMobile = await emailOrMobileSchema.isValid(emailOrMobile);
-		if (!isValidEmailOrMobile) {
+		const isValidOTP = await otpSchema.isValid(otp);
+		if (!isValidEmailOrMobile || !isValidOTP) {
 			return new ErrorResponse(res).send({
 				statusCode: 422,
 				message: "Invalid data received. Please resubmit the form",
@@ -72,8 +73,8 @@ export const validateOTP = async (req, res) => {
 
 		// Validating OTP
 		const isValid = await OTPValidator({ userId, otp });
-		if (isValid === null) {
-			return new ErrorResponse(res).send({ statusCode: 422, message: "Invalid OTP" });
+		if (isValid !== "Valid OTP") {
+			return new ErrorResponse(res).send({ statusCode: 422, message: isValid });
 		}
 
 		// Updating that user credentials are verified
