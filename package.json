@@ -2,6 +2,7 @@
   "name": "chattersapp",
   "version": "1.0.0",
   "main": "index.js",
+  "workspaces": ["packages/*"],
   "scripts": {
     "test": "echo \"Error: no test specified\" ",
     "prepare": "husky install",

@@ -26,7 +26,7 @@ const notificationSchema = new Schema(
 	{ timestamps: true },
 );
 
-notificationSchema.index({ senderId: 1, receiverId: 1, groupId: 1 }, { unique: true });
+notificationSchema.index({ senderId: 1, receiverId: 1 }, { unique: true });
 
 const Notification = mongoose.model("Notification", notificationSchema);
 

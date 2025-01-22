@@ -29,7 +29,7 @@ const conversationSchema = new Schema(
 	},
 );
 
-conversationSchema.index({ initiator: 1, target: 1, groupId: 1 }, { unique: true });
+conversationSchema.index({ initiator: 1, target: 1 }, { unique: true });
 
 const Conversation = mongoose.model("Conversation", conversationSchema);
 
