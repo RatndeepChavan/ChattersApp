@@ -20,11 +20,16 @@ WORKDIR /app
 FROM base as packages
 
 # Copy package files
-COPY package*.json .
+COPY package*.json ./
 
-# Using cache system benifit to speed-up subsequent build by binding with root/.npm
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci
+# ?If Network error occure in npm install then use
+# npm config set registry http://registry.npmjs.org/
+
+# Using cache system benifit to speed-up subsequent build (better to skip for CI)
+# RUN --mount=type=cache,target=/root/.npm \
+#     npm ci
+
+RUN npm ci
 
 ################################################################################
 # STAGE 3 : BUILD

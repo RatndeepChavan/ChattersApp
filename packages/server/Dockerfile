@@ -19,14 +19,16 @@ FROM base as deps
 WORKDIR /app
 
 # Copy package files
-COPY package*.json .
+COPY package*.json ./
 
-# RUN --mountyy=type=bind,source=package.json,target=package.json \
-#   --mount=type=bind,source=package-lock.json,target=package-lock.json \
+# ?If Network error occure in npm install then use
+# npm config set registry http://registry.npmjs.org/
 
-# Using cache to speed-up subsequent builds
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
+# Using cache to speed-up subsequent builds (better to skip for CI)
+# RUN --mount=type=cache,target=/root/.npm \
+#     npm ci --omit=dev
+
+RUN npm ci --omit=dev
 
 ################################################################################
 # STAGE 3 : BUILD
@@ -56,7 +58,7 @@ WORKDIR /app
 
 # Copy require files from previous stage
 COPY --from=build /app/dist/ .
-COPY --from=build /app/node_modules ./node_modules 
+# COPY --from=build /app/node_modules ./node_modules 
 
 # Container command
 CMD ["index.js"]
