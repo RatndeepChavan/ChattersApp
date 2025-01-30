@@ -1,0 +1,10 @@
+services:
+    frontend:
+        image: ratndeep/chattersapp_frontend:v1.0
+        build:
+            context: ./client
+
+    backend:
+        image: ratndeep/chattersapp_backend:v1.0
+        build:
+            context: ./server
