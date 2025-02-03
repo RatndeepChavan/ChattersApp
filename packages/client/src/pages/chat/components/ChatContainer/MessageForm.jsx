@@ -105,7 +105,11 @@ const MessageForm = forwardRef(function MessageForm(props, ref) {
 					render={({ field }) => (
 						<FormItem className="w-[80%] flex h-full justify-center items-center">
 							<FormControl>
-								<div className="flex h-full w-full items-center" ref={messageRef}>
+								<div
+									className="flex h-full w-full items-center"
+									ref={messageRef}
+									onScroll={(e) => e.stopPropagation()}
+								>
 									<TextareaAutosize
 										minRows={1}
 										maxRows={3}
