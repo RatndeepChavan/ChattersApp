@@ -148,7 +148,7 @@ As per fullstack developer view point deployment is solely focused on docker. Co
   sudo apt-get update
 
   # Add current user to docker group and refresh
-  sudo usermod -aG docker $USER | newgrp docker
+  sudo usermod -aG docker $USER && newgrp docker
   
   # To verify use following commands
   # docker -v           # alternatively docker --version
