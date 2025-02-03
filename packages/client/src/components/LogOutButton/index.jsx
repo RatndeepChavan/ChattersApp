@@ -34,6 +34,12 @@ const LogOutButton = () => {
 	const { mutate, isPending } = useMutation({
 		mutationFn: logOut,
 		onSuccess: (response) => {
+			// reload to clean up
+			// ?Sometimes page show same chat page even after logout to clear that force reload is added.
+			setTimeout(() => {
+				window.location.reload();
+			}, 0);
+
 			// Clear all states.
 			setUserInfo(undefined);
 			setProfileId(undefined);

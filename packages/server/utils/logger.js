@@ -1,4 +1,5 @@
 import winston from "winston";
+import { ENV } from "#src/utils/constants";
 
 // Severity levels.
 const levels = {
@@ -11,8 +12,7 @@ const levels = {
 
 // Method to set severity based on ENV: (development : all log, production :  warn and error)
 const level = () => {
-	const env = "development";
-	const isDevelopment = env === "development";
+	const isDevelopment = ENV === "development";
 	return isDevelopment ? "debug" : "warn";
 };
 
